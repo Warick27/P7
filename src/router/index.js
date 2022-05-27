@@ -21,6 +21,16 @@ const router = createRouter({
       name: "signup",
       component: SiGnUp,
     },
+    {
+      path: "/post",
+      name: "post",
+      component: () => import("../views/AddPost.vue"),
+    },
+    {
+      path: "/comment",
+      name: "commenataire",
+      component: () => import("../views/AddCom.vue"),
+    },
   ],
 });
 

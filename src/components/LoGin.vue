@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <form @submit.prevent="handleSubmit">
     <h3>Se connecter</h3>
     <div class="form-group">
@@ -46,9 +46,8 @@ export default {
       );
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("id", response.data.userId);
-      this.$store.dispatch("user", response.data.user);
       this.$router.push("/");
     },
   },
 };
-</script>
+</script> -->

@@ -13,28 +13,17 @@
 
 <script>
 import NaV from "./components/NaV.vue";
-// import axios from "axios";
 
 export default {
   name: "App",
   components: {
     NaV,
   },
-
-  // async created() {
-  // renvoi tout les users maybe for Admin ?
-  // const id = localStorage.getItem("id");
-  // const response = await axios.get(`user/${id}`);
-  // this.$store.dispatch("user", response.data);
-
-  // const response = await axios.get("user/");
-  // console.log(response.data);
-  // },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans=400,500,600,800");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -79,14 +68,18 @@ html,
 }
 
 .auth-wrapper {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  flex-direction: column;
-  text-align: left;
+  align-items: flex-start;
+  text-align: left; */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 60%;
+  left: 50%;
 }
 
 .auth-inner {
-  width: 450px;
+  width: 70vw;
   margin: auto;
   background: #fff;
   box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
@@ -108,17 +101,5 @@ html,
 }
 .custom-control-label {
   font-weight: 400;
-}
-
-.forgot-password,
-.forgot-password a {
-  text-align: right;
-  font-size: 13px;
-  padding-top: 10px;
-  color: #7f7d7d;
-  margin: 0;
-}
-.forgot-password a {
-  color: #167bff;
 }
 </style>

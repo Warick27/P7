@@ -1,7 +1,6 @@
 <template>
   <div class="containerPost">
     <div class="tofill">
-      <h2>Nouveau post</h2>
       <label for="titre" class="field_label"
         >Titre :<input
           type="text"
@@ -37,9 +36,7 @@
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
-      <button class="btn valid" :class="buttonUnselectedStyle" type="submit">
-        Valider
-      </button>
+      <button class="btn btn-primary btn-block" type="submit">Valider</button>
     </div>
   </div>
 </template>
@@ -110,7 +107,7 @@ h2 {
   color: #aaaaaa;
 }
 
-.btn {
+/* .btn {
   width: 100%;
   padding: 15px 20px;
   border-radius: 10px;
@@ -130,5 +127,5 @@ h2 {
 
 .validation {
   display: flex;
-}
+} */
 </style>

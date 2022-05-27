@@ -1,20 +1,12 @@
 <template>
   <div id="news">
-    <!-- <div class="hello">Bienvenue User Name !</div> -->
     <div class="feed">
-      <!-- <article class="post" v-for="item in this.posts" :key="item.postId"> -->
       <article
         ref="class"
         class="post"
-        v-for="item in posts"
-        :key="item.postId"
       >
-        <!-- <article class="post"> -->
         <div class="post_user">
           <ul class="post_user_band">
-            <!-- <li>User Name</li>
-            <li>Date</li>
-            <li>...</li> -->
             <li>{{ item.authorId }}</li>
             <li>{{ item.date }}</li>
             <li>
@@ -27,7 +19,7 @@
               </button>
             </li>
           </ul>
-          <h1><a href="`./post/${item.id}`"></a>{{ item.title }}</h1>
+          <h1>{{ item.title }}</h1>
           <!-- <h1 @click="displayPost">{{ item.title }}</h1> -->
         </div>
         <div class="post_image">
@@ -58,15 +50,6 @@
                 />
               </a>
             </div>
-            <!-- <label for="pseudo" class="field_label"
-              ><input
-                type="text"
-                name="commentaire"
-                v-model.trim="commentaire"
-                id="commentaire"
-                class="field_input"
-                placeholder="Ajouter un commentaire..."
-            /></label> -->
           </div>
         </div>
       </article>
@@ -78,14 +61,14 @@
 import axios from "axios";
 
 export default {
-  name: "FeedShow",
+  name: "postUnique",
   data() {
     return {
       posts: [],
     };
   },
   created() {
-    axios.get("post").then((response) => {
+    axios.getone("post").then((response) => {
       this.posts = response.data;
       console.log(this.posts);
     });

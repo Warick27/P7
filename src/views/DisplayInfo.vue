@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <NewComment />
+    <postUnique />
   </div>
 </template>
 <script>
-import NewComment from "../components/NewComment.vue";
+import postUnique from "../components/postUnique.vue";
 
 export default {
   name: "app",
   components: {
-    NewComment,
+    postUnique,
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
+  <h1>Nouveau commentaire</h1>
   <div class="containerCom">
     <div class="tofill">
-      <h2>Nouveau commentaire</h2>
       <label for="message" class="field_label">
         <textarea
           name="message"
@@ -22,9 +22,7 @@
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
-      <button class="btn valid" :class="buttonUnselectedStyle" type="submit">
-        Valider
-      </button>
+      <button class="btn btn-primary btn-block" type="submit">Valider</button>
     </div>
   </div>
 </template>
@@ -33,7 +31,7 @@ export default {
   name: "ComCreation",
 };
 </script>
-<style>
+<style scoped>
 .containerCom {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -56,7 +54,6 @@ export default {
   }
 }
 h2 {
-  margin-bottom: 30px;
   text-align: center;
 }
 .tofill {
@@ -93,27 +90,5 @@ h2 {
 .field_input::placeholder {
   height: 30px;
   color: #aaaaaa;
-}
-
-.btn {
-  width: 100%;
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-family: "Roboto", sans-serif;
-  color: white;
-  background: linear-gradient(to bottom right, #20ad5b, 60%, #0e6429);
-  border: none;
-  margin: 10px;
-  cursor: pointer;
-  box-shadow: 0px 4px 10px 1px #d4d4d4;
-}
-
-.valid:hover {
-  background: linear-gradient(to bottom right, #20ad5b, 90%, #0e6429);
-  box-shadow: 0 4px 10px 1px #a6a6a6;
-}
-
-.validation {
-  display: flex;
 }
 </style>

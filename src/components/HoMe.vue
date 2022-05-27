@@ -1,30 +1,40 @@
 <template>
   <div>
-    <h3 v-if="user">Bienvenue, {{ user[0] }}</h3>
+    <div v-if="user">
+      <h3>Bienvenue, {{ user[0].pseudo }}</h3>
+      <button class="btn btn-primary btn-block" @click="clickPost">
+        Ajouter un nouveau post
+      </button>
+      <FeedShow />
+    </div>
     <h3 v-if="!user">vous n'êtes pas connecté</h3>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import FeedShow from "./FeedShow.vue";
 
 export default {
   name: "HoMe",
-  computed: {
-    ...mapGetters(["user"]),
+  data() {
+    return {
+      user: null,
+    };
   },
-  // data() {
-  //   return {
-  //     user: null,
-  //   };
-  // },
+  components: {
+    FeedShow,
+  },
   async created() {
     // renvoi tout les users maybe for Admin ?
     const id = localStorage.getItem("id");
     const response = await axios.get(`user/${id}`);
     this.user = response.data;
-    console.log(this.user);
+  },
+  methods: {
+    clickPost() {
+      this.$router.push("/post");
+    },
   },
 };
 </script>

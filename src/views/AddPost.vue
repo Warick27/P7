@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>Bienvenue sur le réseau social de Groupomania</h1>
-    <div></div>
+    <h1>Ajouter un nouveau post</h1>
     <PostCreation />
   </div>
 </template>
