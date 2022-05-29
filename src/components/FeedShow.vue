@@ -34,7 +34,7 @@
         </div>
         <div class="post_image">
           <div class="picto">
-            <img src="item.imageUrl" />
+            <img :src="item.imageUrl" />
           </div>
         </div>
         <div>

@@ -19,13 +19,6 @@
           cols="30"
           rows="10"
         ></textarea>
-        <!-- <input
-          type="textarea"
-          name="message"
-          v-model.trim="message"
-          id="message"
-          class="field_input"
-      /> -->
       </label>
       <label for="image" class="field_label"
         >Ajouter une image ? :<input
@@ -65,16 +58,13 @@ export default {
       console.log(id);
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
-      const response = axios.post(
-        "/post",
-        fd,
-        {
-          title: this.titre,
-          text: this.message,
-          userId: id,
-        },
-        headers: { 'Content-Type': 'multipart/form-data' }
-      );
+      fd.append("title", this.titre);
+      fd.append("text", this.message);
+      fd.append("userId", id);
+
+      const response = axios.post("/post", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       console.log(response);
       this.$router.push("/");
     },

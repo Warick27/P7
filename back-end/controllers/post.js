@@ -24,7 +24,7 @@ exports.getOne = (req, res, next) => {
 // maintenant crée le fichier mais la requête n'aboutit pas
 exports.create = (req, res, next) => {
 
-    const image = `${req.protocol}://${req.get('host')}/images/${req.file.name}`;
+    const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     // const image = (req.imageUrl) ?  `${req.protocol}://${req.get('host')}/images/post/${req.file.name}` : "";
     // console.log(image);
     const newPost = {
@@ -35,7 +35,7 @@ exports.create = (req, res, next) => {
     };
     console.log(newPost);
     let sql = `INSERT INTO groupomania.post (authorId, title, textPost, imageUrl) VALUES (?,?,?,?);`;
-    pool.execute(sql, [newPost.authorId, newPost.title,  newPost.text, newPost.imageUrl], function (err, result) {
+    pool.execute(sql, [newPost.authorId, newPost.title,  newPost.textPost, newPost.imageUrl], function (err, result) {
         if (err) throw err;
         res.status(201).json({ message: `Post ajouté` });
     });
