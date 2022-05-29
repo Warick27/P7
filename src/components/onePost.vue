@@ -1,23 +1,11 @@
 <template>
   <div id="news">
-    <!-- <div class="hello">Bienvenue User Name !</div> -->
     <div class="feed">
-      <!-- <article class="post" v-for="item in this.posts" :key="item.postId"> -->
-      <article
-        ref="class"
-        class="post"
-        v-for="item in posts"
-        :key="item.postId"
-      >
-        <!-- <article class="post"> -->
+      <article class="post">
         <div class="post_user">
           <ul class="post_user_band">
-            <!-- <li>User Name</li>
-            <li>Date</li>
-            <li>...</li> -->
-            <!-- <li id="ItemKey">{{ item.postId }}</li> -->
-            <li>{{ item.authorId }}</li>
-            <li>{{ item.date }}</li>
+            <li>{{ post.authorId }}</li>
+            <li>{{ post.date }}</li>
             <li>
               <button class="btn-style">
                 <img
@@ -29,12 +17,12 @@
             </li>
           </ul>
           <h1>
-            <a :href="'/post/' + item.postId">{{ item.title }}</a>
+            {{ item.title }}
           </h1>
         </div>
         <div class="post_image">
           <div class="picto">
-            <img src="item.imageUrl" />
+            <img :src="post.imageUrl" />
           </div>
         </div>
         <div>
@@ -52,6 +40,7 @@
                   id="heart"
                 />
               </button>
+              <!-- Voir que faire avec bouton comment sur cette page -->
               <a
                 class="bt-style"
                 :href="'/post/' + item.postId"
@@ -78,12 +67,13 @@ export default {
   name: "FeedShow",
   data() {
     return {
-      posts: [],
+      post: [],
     };
   },
   created() {
+    // récupérer id dans url
     axios.get("post").then((response) => {
-      this.posts = response.data;
+      this.post = response.data;
     });
   },
 };

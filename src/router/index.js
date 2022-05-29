@@ -22,17 +22,23 @@ const router = createRouter({
       component: SiGnUp,
     },
     {
-      path: "/post",
+      path: "/post/",
       name: "post",
       component: () => import("../views/AddPost.vue"),
     },
     {
+      path: "/post/:id",
+      name: "onepost",
+      component: () => import("../views/AddPost.vue"),
+    },
+    {
       path: "/comment",
-      name: "commenataire",
+      name: "commentaire",
       component: () => import("../views/AddCom.vue"),
     },
     {
       path: "/users/:id",
+      name: "users",
       component: () => import("../views/users.vue"),
     },
   ],
