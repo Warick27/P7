@@ -1,34 +1,54 @@
 <template>
   <h1>Nouveau commentaire</h1>
-  <div class="containerCom">
+  <form class="containerCom">
     <div class="tofill">
       <label for="message" class="field_label">
         <textarea
           name="message"
           id="message"
+          v-model.trim="message"
           class="field_input"
           cols="30"
           rows="10"
         ></textarea>
-        <!-- <input
-          type="textarea"
-          name="message"
-          v-model.trim="message"
-          id="message"
-          class="field_input"
-          placeholder="Ajouter un commentaire..."
-      /> -->
       </label>
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
       <button class="btn btn-primary btn-block" type="submit">Valider</button>
     </div>
-  </div>
+  </form>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "ComCreation",
+  data() {
+    return {
+      message: "",
+    };
+  },
+  computed: {
+    validateData: function () {
+      if (this.message != "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    async commentSend() {
+      const userId = localStorage.getItem("id");
+      const response = await axios.post("/comment", {
+        message: this.message,
+        authorId: userId,
+      });
+      console.log(response);
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 <style scoped>

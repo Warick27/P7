@@ -15,6 +15,7 @@
             <!-- <li>User Name</li>
             <li>Date</li>
             <li>...</li> -->
+            <li id="ItemKey">{{ item.postId }}</li>
             <li>{{ item.authorId }}</li>
             <li>{{ item.date }}</li>
             <li>
@@ -32,7 +33,7 @@
         </div>
         <div class="post_image">
           <div class="picto">
-            <img src="item.imageUrl" alt="item.alt" />
+            <img src="item.imageUrl" />
           </div>
         </div>
         <div>
@@ -50,7 +51,7 @@
                   id="heart"
                 />
               </button>
-              <a class="bt-style" href="/comment">
+              <a class="bt-style" href="#" @click="addComment()">
                 <img
                   src="../assets/comment-regular.svg"
                   alt="Commentaire"
@@ -76,6 +77,7 @@
 
 <script>
 import axios from "axios";
+// import router from "../router";
 
 export default {
   name: "FeedShow",
@@ -84,13 +86,28 @@ export default {
       posts: [],
     };
   },
+  props: ["keyval"],
   created() {
     axios.get("post").then((response) => {
       this.posts = response.data;
-      console.log(this.posts);
+      // console.log(this.posts);
+      // console.log(this.posts[0]);
+      // console.log(this.posts[0].postId);
     });
   },
   methods: {
+    addComment() {
+      // pas loin récupère le dernier, pas les autres
+      const id = document.getElementById("ItemKey");
+      console.log(id.textContent);
+
+      // console.log(this.$refs[item.postId]);
+      // localStorage.setItem(item.postId);
+      // const idPost = localStorage.setItem("this.item.postId");
+      // console.log(idPost);
+      // this.$router.push("/comment");
+    },
+
     // displayPost() {
     //   this.$router.push(/post)
     // }

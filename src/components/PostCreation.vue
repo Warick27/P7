@@ -1,5 +1,5 @@
 <template>
-  <div class="containerPost">
+  <form class="containerPost" @submit.prevent="handleSubmit()">
     <div class="tofill">
       <label for="titre" class="field_label"
         >Titre :<input
@@ -14,6 +14,7 @@
         <textarea
           name="message"
           id="message"
+          v-model.trim="message"
           class="field_input"
           cols="30"
           rows="10"
@@ -31,18 +32,52 @@
           type="file"
           name="image"
           id="image"
+          ref="fileUpload"
           class="field_input"
+          @change="onFileSelected"
       /></label>
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
       <button class="btn btn-primary btn-block" type="submit">Valider</button>
     </div>
-  </div>
+  </form>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "PostCreation",
+  data() {
+    return {
+      titre: "",
+      message: "",
+      selectedFile: null,
+    };
+  },
+  methods: {
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+      console.log(this.selectedFile.name);
+    },
+    handleSubmit() {
+      const id = localStorage.getItem("id");
+      console.log(id);
+      const fd = new FormData();
+      fd.append("image", this.selectedFile, this.selectedFile.name);
+      const response = axios.post(
+        "/post",
+        {
+          titre: this.titre,
+          text: this.message,
+          userId: id,
+        },
+        fd
+      );
+      console.log(response);
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 <style>
@@ -106,26 +141,4 @@ h2 {
   height: 30px;
   color: #aaaaaa;
 }
-
-/* .btn {
-  width: 100%;
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-family: "Roboto", sans-serif;
-  color: white;
-  background: linear-gradient(to bottom right, #20ad5b, 60%, #0e6429);
-  border: none;
-  margin: 10px;
-  cursor: pointer;
-  box-shadow: 0px 4px 10px 1px #d4d4d4;
-}
-
-.valid:hover {
-  background: linear-gradient(to bottom right, #20ad5b, 90%, #0e6429);
-  box-shadow: 0 4px 10px 1px #a6a6a6;
-}
-
-.validation {
-  display: flex;
-} */
 </style>

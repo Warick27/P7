@@ -31,6 +31,10 @@ const router = createRouter({
       name: "commenataire",
       component: () => import("../views/AddCom.vue"),
     },
+    {
+      path: "/users/:id",
+      component: () => import("../views/users.vue"),
+    },
   ],
 });
 

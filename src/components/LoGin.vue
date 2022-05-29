@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <form @submit.prevent="handleSubmit">
     <h3>Se connecter</h3>
     <div class="form-group">
@@ -37,17 +37,15 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const response = await axios.post(
-        "http://localhost:3000/api/user/login",
-        {
-          email: this.email,
-          password: this.password,
-        }
-      );
+      const response = await axios.post("/user/login", {
+        email: this.email,
+        password: this.password,
+      });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("id", response.data.userId);
+      localStorage.setItem("pseudo", response.data.pseudo);
       this.$router.push("/");
     },
   },
 };
-</script> -->
+</script>

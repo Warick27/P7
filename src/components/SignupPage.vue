@@ -1,17 +1,5 @@
 <template>
-  <form @submit="handleSubmit">
-    <h3 v-if="mode == 'signup'">S'enregistrer</h3>
-    <h3 v-else>Se connecter</h3>
-    <p v-if="mode == 'signup'">
-      Bon retour sur la plateforme social de Groupomania !
-      <span class="link" @click.prevent="switchToLogin()">Connecte toi</span>
-    </p>
-    <p v-else>
-      Nouveau sur la plateforme social de Groupomania ?
-      <span class="link" @click.prevent="switchToSignup()"
-        >Crée toi un compte</span
-      >
-    </p>
+  <form @submit="handleMAJ">
     <div class="form-group">
       <label for="form-control email">Email</label>
       <input
@@ -30,8 +18,7 @@
         placeholder="password"
       />
     </div>
-
-    <div class="form-group" v-if="mode == 'signup'">
+    <div class="form-group">
       <label for="form-control pseudo">Pseudo</label>
       <input
         type="text"
@@ -41,19 +28,11 @@
       />
     </div>
 
-    <!-- <button
-      class="btn btn-primary btn-block"
-      :class="{ disabled: !validateData }"
-      v-if="mode == 'signup'"
-    >
-      S'inscrire
-    </button> -->
     <button
       class="btn btn-primary btn-block"
       :class="{ disabled: !validateData }"
-      v-else
     >
-      Se connecter
+      Valider
     </button>
   </form>
 </template>
@@ -67,7 +46,6 @@ export default {
       email: "",
       password: "",
       pseudo: "",
-      mode: "login",
     };
   },
   computed: {
@@ -105,15 +83,14 @@ export default {
     //   localStorage.setItem("token", response.data.token);
     //   this.$router.push("/");
     // },
-    async handleSubmit() {
-      const response = await axios.post("/user/signup", {
+    async handleLogin() {
+      const response = await axios.post("/user/login", {
         email: this.email,
         password: this.password,
-        pseudo: this.pseudo,
       });
-      localStorage.setItem("token", response.data.token);
+      console.log(response);
       localStorage.setItem("id", response.data.userId);
-
+      localStorage.setItem("token", response.data.token);
       this.$router.push("/");
     },
   },
