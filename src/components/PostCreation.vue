@@ -67,12 +67,13 @@ export default {
       fd.append("image", this.selectedFile, this.selectedFile.name);
       const response = axios.post(
         "/post",
+        fd,
         {
-          titre: this.titre,
+          title: this.titre,
           text: this.message,
           userId: id,
         },
-        fd
+        headers: { 'Content-Type': 'multipart/form-data' }
       );
       console.log(response);
       this.$router.push("/");
