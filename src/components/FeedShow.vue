@@ -15,13 +15,13 @@
             <li>{{ item.authorId }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
-              <button class="btn-style" @click="modalDisplay">
+              <a class="btn-style" :href="'/post/' + item.postId">
                 <img
                   src="../assets/ellipsis-solid.svg"
                   alt="profil"
                   id="ellipsis"
                 />
-              </button>
+              </a>
             </li>
           </ul>
           <h1>
@@ -75,9 +75,12 @@ export default {
     };
   },
   created() {
-    axios.get("post").then((response) => {
-      this.posts = response.data;
-    });
+    let token = localStorage.getItem("token");
+    axios
+      .get("post", { headers: { Authorization: "Bearer " + token } })
+      .then((response) => {
+        this.posts = response.data;
+      });
   },
   methods: {
     formatDate(input) {
@@ -87,9 +90,9 @@ export default {
         day = datePart[2];
       return "Publié le " + day + "." + month + "." + year;
     },
-    modalDisplay() {
-      confirm("modifier ?");
-    },
+    // modalDisplay() {
+    //   confirm("modifier ?");
+    // },
   },
 };
 </script>

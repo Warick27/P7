@@ -25,36 +25,56 @@ exports.getOne = (req, res, next) => {
 exports.create = (req, res, next) => {
 
     const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-    // const image = (req.imageUrl) ?  `${req.protocol}://${req.get('host')}/images/post/${req.file.name}` : "";
-    // console.log(image);
     const newPost = {
         authorId: req.body.userId,
         title: req.body.title,
         textPost: req.body.text,
         imageUrl: image,
     };
-    console.log(newPost);
     let sql = `INSERT INTO groupomania.post (authorId, title, textPost, imageUrl) VALUES (?,?,?,?);`;
     pool.execute(sql, [newPost.authorId, newPost.title,  newPost.textPost, newPost.imageUrl], function (err, result) {
         if (err) throw err;
         res.status(201).json({ message: `Post ajouté` });
     });
 };
-
+// if (req.file)
 // ok mais à implémenter pour d'autres modifications
 exports.modify = (req, res, next) => {
-    let searchPost = `SELECT * FROM groupomania.post WHERE postId=?;`;
-    pool.execute(searchPost, [req.params.id], function (err, result) {
-        if (err) res.status(400).json({ err });
-        let found = result[0];
-        console.log(found);
-        if (found) {
-            let updatePost = `UPDATE groupomania.post SET title=? WHERE postId=?`;
-            pool.execute(updatePost, [req.body.title, req.params.id],function (err, result) {
+        let searchPost = `SELECT * FROM groupomania.post WHERE postId=?;`;
+        pool.execute(searchPost, [req.params.id], function (err, result) {
+            if (err) res.status(400).json({ err });
+            let found = result[0];
+            if (found.imageUrl != "") {
+                const content = found.imageUrl.split('/images/post/')[1];
+                fs.unlink(`images/post/${content}`, () => {
+                    if (err) console.log(err);
+                    else console.log('Image supprimée du dossier image');
+                })
+            }
+            const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+            const updateInfo = {
+                title: req.body.title,
+                textPost: req.body.text,
+                imageUrl: image,
+            };
+            let updatePost = `UPDATE groupomania.post SET title=?, textPost=?, imageUrl=? WHERE postId=?`;
+            pool.execute(updatePost, [updateInfo.title, updateInfo.textPost, updateInfo.imageUrl, req.params.id],function (err, result) {
                 if (err) res.status(400).json({ err });
                 result.status(201).json({ message: `post modifié` });
             });
-        };
+    // let searchPost = `SELECT * FROM groupomania.post WHERE postId=?;`;
+    // pool.execute(searchPost, [req.params.id], function (err, result) {
+    //     if (err) res.status(400).json({ err });
+    //     let found = result[0];
+    //     // console.log(found);
+    //     if (found) {
+    //         let updatePost = `UPDATE groupomania.post SET title=? WHERE postId=?`;
+    //         pool.execute(updatePost, [req.body.title, req.params.id],function (err, result) {
+    //             if (err) res.status(400).json({ err });
+    //             result.status(201).json({ message: `post modifié` });
+    //         });
+    //     };
+    // })
     })
 }
 

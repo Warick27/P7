@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import FeedShow from "./FeedShow.vue";
 
 export default {

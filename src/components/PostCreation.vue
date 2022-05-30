@@ -55,6 +55,7 @@ export default {
     },
     handleSubmit() {
       const id = localStorage.getItem("id");
+      let token = localStorage.getItem("token");
       console.log(id);
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
@@ -62,9 +63,14 @@ export default {
       fd.append("text", this.message);
       fd.append("userId", id);
 
-      const response = axios.post("/post", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = axios.post(
+        "/post",
+        fd,
+        { headers: { Authorization: "Bearer " + token } },
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       console.log(response);
       this.$router.push("/");
     },

@@ -67,13 +67,16 @@ export default {
     };
   },
   created() {
+    let token = localStorage.getItem("token");
     const id = this.$route.params.id;
-    axios.get("post/" + id).then((response) => {
-      // console.log(response.data[0].postId);
-      // const data = JSON.stringify(response.data);
-      // console.log(typeof data);
-      this.post = response.data;
-    });
+    axios
+      .get("post/" + id, { headers: { Authorization: "Bearer " + token } })
+      .then((response) => {
+        // console.log(response.data[0].postId);
+        // const data = JSON.stringify(response.data);
+        // console.log(typeof data);
+        this.post = response.data;
+      });
   },
   methods: {
     formatDate(input) {

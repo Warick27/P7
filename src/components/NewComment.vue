@@ -42,12 +42,16 @@ export default {
     async commentSend() {
       const userId = localStorage.getItem("id");
       const id = this.$route.params.id;
-      console.log(id + " " + userId);
-      const response = await axios.post("/comment", {
-        postId: id,
-        authorId: userId,
-        commentaire: this.message,
-      });
+      let token = localStorage.getItem("token");
+      const response = await axios.post(
+        "/comment",
+        {
+          postId: id,
+          authorId: userId,
+          commentaire: this.message,
+        },
+        { headers: { Authorization: "Bearer " + token } }
+      );
       console.log(response);
       this.$router.push("/");
     },

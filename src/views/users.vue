@@ -77,11 +77,14 @@ export default {
     SignupPage,
   },
   created() {
-    // const userId = localStorage.getItem("id");
-    // axios.get(`user/${userId}`).then((response) => {
-    //   console.log(response);
-    //   this.user = response.data;
-    // });
+    let token = localStorage.getItem("token");
+    const userId = localStorage.getItem("id");
+    axios
+      .get(`user/${userId}`, { headers: { Authorization: "Bearer " + token } })
+      .then((response) => {
+        console.log(response);
+        this.user = response.data;
+      });
   },
   methods: {
     clickEdit() {
@@ -97,9 +100,14 @@ export default {
     },
     async handleDelete() {
       const userId = localStorage.getItem("id");
-      const response = await axios.delete(`user/${userId}`, {
-        data: { password: this.password },
-      });
+      let token = localStorage.getItem("token");
+      const response = await axios.delete(
+        `user/${userId}`,
+        { headers: { Authorization: "Bearer " + token } },
+        {
+          data: { password: this.password },
+        }
+      );
       console.log(response);
       localStorage.removeItem("token");
       localStorage.removeItem("id");
