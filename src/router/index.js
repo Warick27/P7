@@ -29,10 +29,10 @@ const router = createRouter({
     {
       path: "/post/:id",
       name: "onepost",
-      component: () => import("../views/AddPost.vue"),
+      component: () => import("../views/onePost.vue"),
     },
     {
-      path: "/comment",
+      path: "/post/:id/comment",
       name: "commentaire",
       component: () => import("../views/AddCom.vue"),
     },

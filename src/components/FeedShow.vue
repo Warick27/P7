@@ -12,10 +12,6 @@
         <!-- <article class="post"> -->
         <div class="post_user">
           <ul class="post_user_band">
-            <!-- <li>User Name</li>
-            <li>Date</li>
-            <li>...</li> -->
-            <!-- faire une requête join pour afficher le pseudo -->
             <li>{{ item.authorId }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
@@ -52,11 +48,8 @@
                   id="heart"
                 />
               </button>
-              <a
-                class="bt-style"
-                :href="'/post/' + item.postId"
-                @click="addComment()"
-              >
+              <a class="bt-style" :href="'/post/' + item.postId + '/comment'">
+                <!--@click="addComment()"  -->
                 <img
                   src="../assets/comment-regular.svg"
                   alt="Commentaire"
@@ -87,18 +80,9 @@ export default {
     });
   },
   methods: {
-    // formatDate(input) {
-
-    //   const datePart = input.match(/\d+/g),
-    //     year = datePart[0].substring(2),
-    //     month = datePart[1],
-    //     day = datePart[2];
-    //   return day + "/" + month + "/" + year;
-    // },
     formatDate(input) {
       const datePart = input.match(/\d+/g),
         year = datePart[0].substring(0),
-        // month = input.getDate(),
         month = datePart[1],
         day = datePart[2];
       return "Publié le " + day + "." + month + "." + year;

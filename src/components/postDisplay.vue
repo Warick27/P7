@@ -1,11 +1,11 @@
 <template>
   <div id="news">
     <div class="feed">
-      <article class="post">
+      <article class="post" v-for="item in post" :key="item.postId">
         <div class="post_user">
           <ul class="post_user_band">
-            <li>{{ post.authorId }}</li>
-            <li>{{ post.date }}</li>
+            <li>{{ item.authorId }}</li>
+            <li>{{ formatDate(item.date) }}</li>
             <li>
               <button class="btn-style">
                 <img
@@ -22,7 +22,7 @@
         </div>
         <div class="post_image">
           <div class="picto">
-            <img :src="post.imageUrl" />
+            <img :src="item.imageUrl" />
           </div>
         </div>
         <div>
@@ -40,12 +40,7 @@
                   id="heart"
                 />
               </button>
-              <!-- Voir que faire avec bouton comment sur cette page -->
-              <a
-                class="bt-style"
-                :href="'/post/' + item.postId"
-                @click="addComment()"
-              >
+              <a class="bt-style" href="#">
                 <img
                   src="../assets/comment-regular.svg"
                   alt="Commentaire"
@@ -64,17 +59,30 @@
 import axios from "axios";
 
 export default {
-  name: "FeedShow",
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "onePost",
   data() {
     return {
       post: [],
     };
   },
   created() {
-    // récupérer id dans url
-    axios.get("post").then((response) => {
+    const id = this.$route.params.id;
+    axios.get("post/" + id).then((response) => {
+      // console.log(response.data[0].postId);
+      // const data = JSON.stringify(response.data);
+      // console.log(typeof data);
       this.post = response.data;
     });
+  },
+  methods: {
+    formatDate(input) {
+      const datePart = input.match(/\d+/g),
+        year = datePart[0].substring(0),
+        month = datePart[1],
+        day = datePart[2];
+      return "Publié le " + day + "." + month + "." + year;
+    },
   },
 };
 </script>
@@ -97,7 +105,7 @@ a {
 }
 
 .post {
-  margin: 50px auto;
+  margin: 20px auto;
   border: 1px solid black;
   border-radius: 10px;
   width: 50%;
@@ -196,25 +204,8 @@ h1 {
   padding: 10px;
   width: 70%;
 }
-/* // .picto img {
-//   width: 100%;
-//   height: 300px;
-//   object-fit: cover;
-// }
-// .post_image {
-//   border: 1px solid black;
-//   border-width: 1px 0;
-// }
-// .post_user_band,
-// .post_comment_info {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   margin: 20px;
-//   padding: 10px;
-// } */
 
-/* Reset CSS*/
+Reset CSS
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

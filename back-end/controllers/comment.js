@@ -3,7 +3,7 @@ const pool = require('../config/db');
 // Ok plus de message : "res.status is not a function" par rapport à la ligne 15 en changeant le nom à result
 exports.create = (req, res, next) => {
     const comment = {
-        postId: req.body.id,
+        postId: req.body.postId,
         authorId: req.body.authorId,
         commentTxt: req.body.commentaire,
     };
