@@ -15,7 +15,7 @@
             <li>{{ item.authorId }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
-              <button class="btn-style">
+              <button class="btn-style" @click="modalDisplay">
                 <img
                   src="../assets/ellipsis-solid.svg"
                   alt="profil"
@@ -86,6 +86,9 @@ export default {
         month = datePart[1],
         day = datePart[2];
       return "Publié le " + day + "." + month + "." + year;
+    },
+    modalDisplay() {
+      confirm("modifier ?");
     },
   },
 };
@@ -161,70 +164,6 @@ h1 {
   margin: 20px 20px 10px;
   padding: 10px;
 }
-.field {
-  margin-top: 0.25rem;
-}
-
-.field_label {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  color: rgb(55 65 81);
-  margin-bottom: 15px;
-}
-
-.field_input {
-  display: inline-flex;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  border-radius: 0.375rem;
-  padding: 8px;
-  border: none;
-  background: #f2f2f2;
-  font-weight: 500;
-  font-size: 16px;
-  color: black;
-  flex: 1;
-}
-
-.field_input::placeholder {
-  height: 30px;
-  color: #aaaaaa;
-}
-
-.field_label {
-  width: 60%;
-  margin: 10px auto;
-  border: 1px solid #0b040424;
-  border-radius: 10px;
-}
-
-.post_comment_add {
-  margin: 10px auto 20px;
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  width: 70%;
-}
-/* // .picto img {
-//   width: 100%;
-//   height: 300px;
-//   object-fit: cover;
-// }
-// .post_image {
-//   border: 1px solid black;
-//   border-width: 1px 0;
-// }
-// .post_user_band,
-// .post_comment_info {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   margin: 20px;
-//   padding: 10px;
-// } */
 
 /* Reset CSS*/
 /* http://meyerweb.com/eric/tools/css/reset/ 

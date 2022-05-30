@@ -1,5 +1,5 @@
 <template>
-  <form @submit="handleMAJ">
+  <form @submit.prevent="handleSignup">
     <div class="form-group">
       <label for="form-control email">Email</label>
       <input
@@ -66,31 +66,16 @@ export default {
     },
   },
   methods: {
-    switchToSignup: function () {
-      this.mode = "signup";
-    },
-    switchToLogin: function () {
-      this.mode = "login";
-    },
-    // async handleSubmit() {
-    //   const response = await axios.post("/user/signup", {
-    //     email: this.email,
-    //     password: this.password,
-    //     pseudo: this.pseudo,
-    //   });
-    //   console.log(response);
-    //   localStorage.setItem("id", response.data.userId);
-    //   localStorage.setItem("token", response.data.token);
-    //   this.$router.push("/");
-    // },
-    async handleLogin() {
-      const response = await axios.post("/user/login", {
+    async handleSignup() {
+      const response = await axios.post("/user/signup", {
         email: this.email,
         password: this.password,
+        pseudo: this.pseudo,
       });
-      console.log(response);
+      // console.log(response);
       localStorage.setItem("id", response.data.userId);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("pseudo", response.data.pseudo);
       this.$router.push("/");
     },
   },

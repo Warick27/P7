@@ -32,7 +32,7 @@ exports.signup = (req, response, next) => {
         pool.execute(add, [user.email, user.password, user.pseudo], function (err, result){
           if (err) result.status(400).json({ error })
           response.status(201).json({
-            // ajouter le pseudo
+            pseudo: user.pseudo,
             userId: result.insertId,
             message: 'Utilisateur créé !',
             token: jwt.sign(

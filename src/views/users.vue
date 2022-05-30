@@ -33,12 +33,14 @@
     </div>
     <div id="myInfo">
       <div v-if="mode == 'Lecture'">
-        <p>Pseudo : {{ user[0].pseudo }}</p>
-        <p>Email : {{ user[0].email }}</p>
+        <div v-for="item in user" :key="item.postId">
+          <p>Pseudo : {{ item.pseudo }}</p>
+          <p>Email : {{ item.email }}</p>
+        </div>
       </div>
 
       <SignupPage v-else-if="mode == 'Changement'" id="signup" />
-      <form @submit="handleMAJ" v-else>
+      <form @submit.prevent="handleDelete" v-else>
         <h4>Veuillez entrer votre mot de passe pour supprimer votre compte</h4>
         <div class="form-group">
           <label for="form-control password">Password</label>
@@ -49,12 +51,7 @@
             placeholder="password"
           />
         </div>
-        <button
-          class="btn btn-primary btn-block"
-          :class="{ disabled: !validateData }"
-        >
-          Valider
-        </button>
+        <button class="btn btn-primary btn-block">Valider</button>
       </form>
     </div>
 
@@ -64,6 +61,7 @@
 </template>
 <script>
 import axios from "axios";
+// import axios from "axios";
 import SignupPage from "../components/SignupPage.vue";
 export default {
   name: "profil_edition",
@@ -71,21 +69,19 @@ export default {
     return {
       user: null,
       mode: "Lecture",
+      password: "",
+      token: "",
     };
   },
   components: {
     SignupPage,
   },
   created() {
-    const userId = localStorage.getItem("id");
-    axios.get(`user/${userId}`).then((response) => {
-      console.log(response);
-      this.user = response.data;
-      console.log(this.user[0]);
-      // console.log(this.posts);
-      // console.log(this.posts[0]);
-      // console.log(this.posts[0].postId);
-    });
+    // const userId = localStorage.getItem("id");
+    // axios.get(`user/${userId}`).then((response) => {
+    //   console.log(response);
+    //   this.user = response.data;
+    // });
   },
   methods: {
     clickEdit() {
@@ -98,6 +94,17 @@ export default {
     },
     readingProfile() {
       this.mode = "Lecture";
+    },
+    async handleDelete() {
+      const userId = localStorage.getItem("id");
+      const response = await axios.delete(`user/${userId}`, {
+        data: { password: this.password },
+      });
+      console.log(response);
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      localStorage.removeItem("pseudo");
+      this.$router.push("/");
     },
     // editToggle() {
     //   if (this.mode == "Changement") {

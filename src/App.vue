@@ -30,7 +30,8 @@ export default {
 }
 
 body {
-  background: #1c8ef9 !important;
+  /* background: #1c8ef9 !important; */
+  background: #f0f2f5;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
