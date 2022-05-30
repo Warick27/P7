@@ -15,9 +15,9 @@
             <!-- <li>User Name</li>
             <li>Date</li>
             <li>...</li> -->
-            <!-- <li id="ItemKey">{{ item.postId }}</li> -->
+            <!-- faire une requête join pour afficher le pseudo -->
             <li>{{ item.authorId }}</li>
-            <li>{{ item.date }}</li>
+            <li>{{ formatDate(item.date) }}</li>
             <li>
               <button class="btn-style">
                 <img
@@ -85,6 +85,24 @@ export default {
     axios.get("post").then((response) => {
       this.posts = response.data;
     });
+  },
+  methods: {
+    // formatDate(input) {
+
+    //   const datePart = input.match(/\d+/g),
+    //     year = datePart[0].substring(2),
+    //     month = datePart[1],
+    //     day = datePart[2];
+    //   return day + "/" + month + "/" + year;
+    // },
+    formatDate(input) {
+      const datePart = input.match(/\d+/g),
+        year = datePart[0].substring(0),
+        // month = input.getDate(),
+        month = datePart[1],
+        day = datePart[2];
+      return "Publié le " + day + "." + month + "." + year;
+    },
   },
 };
 </script>
