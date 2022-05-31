@@ -53,7 +53,7 @@ export default {
         { headers: { Authorization: "Bearer " + token } }
       );
       console.log(response);
-      this.$router.push("/");
+      this.$router.push("/post/" + id);
     },
   },
 };

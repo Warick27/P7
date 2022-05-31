@@ -1,29 +1,43 @@
+<!-- <script setup>
+  const vm = getCurrentInstance();
+  const handleClick = () => {
+    console.log(vm);
+  }
+</script> -->
 <template>
   <div id="news">
     <!-- <div class="hello">Bienvenue User Name !</div> -->
     <div class="feed">
       <!-- <article class="post" v-for="item in this.posts" :key="item.postId"> -->
       <article
-        ref="class"
         class="post"
+        ref="item.postId"
         v-for="item in posts"
         :key="item.postId"
       >
         <!-- <article class="post"> -->
         <div class="post_user">
           <ul class="post_user_band">
+            <li id="postId">{{ item.postId }}</li>
             <li>{{ item.authorId }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
-              <a class="btn-style" :href="'/post/' + item.postId">
+              <div class="btn-style" @click="revealMenu">
+                <!-- <a class="btn-style" 
+              :href="'/post/' + item.postId"
+              > -->
                 <img
                   src="../assets/ellipsis-solid.svg"
                   alt="profil"
                   id="ellipsis"
                 />
-              </a>
+              </div>
             </li>
           </ul>
+          <div class="manage">
+            <p>modifier</p>
+            <p>supprimer</p>
+          </div>
           <h1>
             <a :href="'/post/' + item.postId">{{ item.title }}</a>
           </h1>
@@ -41,13 +55,16 @@
           </div>
           <div class="post_comment">
             <div class="post_comment_info">
-              <button class="btn-style">
-                <img
-                  src="../assets/heart-regular.svg"
-                  alt="J'aime"
-                  id="heart"
-                />
-              </button>
+              <div class="heart_style">
+                <p>{{ item.like }}</p>
+                <button class="btn-style" @click="addLike">
+                  <img
+                    src="../assets/heart-regular.svg"
+                    alt="J'aime"
+                    id="heart"
+                  />
+                </button>
+              </div>
               <a class="bt-style" :href="'/post/' + item.postId + '/comment'">
                 <!--@click="addComment()"  -->
                 <img
@@ -66,16 +83,18 @@
 
 <script>
 import axios from "axios";
+// import { getCurrentInstance} from "vue";
 
 export default {
   name: "FeedShow",
   data() {
     return {
       posts: [],
+      token: localStorage.getItem("token"),
     };
   },
   created() {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     axios
       .get("post", { headers: { Authorization: "Bearer " + token } })
       .then((response) => {
@@ -90,9 +109,27 @@ export default {
         day = datePart[2];
       return "Publié le " + day + "." + month + "." + year;
     },
-    // modalDisplay() {
-    //   confirm("modifier ?");
-    // },
+    addLike() {
+      let idUser = localStorage.getItem("id");
+      let idPost = document.getElementById("postId").innerText;
+      axios
+        .post(
+          "like",
+          { userId: idUser, postId: idPost },
+          { headers: { Authorization: "Bearer " + this.token } }
+        )
+        .then((response) => {
+          this.posts = response.data;
+        });
+    },
+    revealMenu() {
+      const visible = (document.querySelector(".manage").style.display);
+      if ((visible.style === "none")) {
+        visible.style = "block";
+      } else {
+        visible.style = "none";
+      }
+    },
   },
 };
 </script>
@@ -119,6 +156,7 @@ a {
   border: 1px solid black;
   border-radius: 10px;
   width: 50%;
+  position: relative;
 }
 
 #ellipsis,
@@ -148,6 +186,17 @@ a {
   object-fit: cover;
 }
 
+.heart_style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart_style p {
+  margin: auto 5px;
+  font-size: 22px;
+}
+
 h1 {
   font-size: inherit;
   text-align: center;
@@ -164,74 +213,15 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin: 20px 20px 10px;
   padding: 10px;
 }
-
-/* Reset CSS*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-p,
-figure,
-figcaption {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-body {
-  line-height: 1;
-}
-
-body,
-html,
-aside,
-h2 {
-  margin: 0;
-  padding: 0;
-}
-
-ol,
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.manage {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 5%;
+  left: 105%;
+  display: none;
 }
 </style>

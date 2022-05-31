@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <SignupPage v-else-if="mode == 'Changement'" id="signup" />
+      <ProfileM v-else-if="mode == 'Changement'" id="signup" />
       <form @submit.prevent="handleDelete" v-else>
         <h4>Veuillez entrer votre mot de passe pour supprimer votre compte</h4>
         <div class="form-group">
@@ -62,7 +62,7 @@
 <script>
 import axios from "axios";
 // import axios from "axios";
-import SignupPage from "../components/SignupPage.vue";
+import ProfileM from "../components/ProfileM.vue";
 export default {
   name: "profil_edition",
   data() {
@@ -74,7 +74,7 @@ export default {
     };
   },
   components: {
-    SignupPage,
+    ProfileM,
   },
   created() {
     let token = localStorage.getItem("token");

@@ -1,10 +1,7 @@
 <template>
   <div id="news">
     <div class="feed">
-      <article
-        ref="class"
-        class="post"
-      >
+      <article ref="class" class="post">
         <div class="post_user">
           <ul class="post_user_band">
             <li>{{ item.authorId }}</li>
@@ -35,13 +32,16 @@
           </div>
           <div class="post_comment">
             <div class="post_comment_info">
-              <button class="btn-style">
-                <img
-                  src="../assets/heart-regular.svg"
-                  alt="J'aime"
-                  id="heart"
-                />
-              </button>
+              <div class="heart_style">
+                <p>{{ item.like }}</p>
+                <button class="btn-style" @click="addLike">
+                  <img
+                    src="../assets/heart-regular.svg"
+                    alt="J'aime"
+                    id="heart"
+                  />
+                </button>
+              </div>
               <a class="bt-style" href="/comment">
                 <img
                   src="../assets/comment-regular.svg"
@@ -74,9 +74,19 @@ export default {
     });
   },
   methods: {
-    // displayPost() {
-    //   this.$router.push(/post)
-    // }
+    addLike() {
+      let idUser = localStorage.getItem("id");
+      let idPost = document.getElementById("postId").innerText;
+      axios
+        .post(
+          "like",
+          { userId: idUser, postId: idPost },
+          { headers: { Authorization: "Bearer " + this.token } }
+        )
+        .then((response) => {
+          this.posts = response.data;
+        });
+    },
   },
 };
 </script>

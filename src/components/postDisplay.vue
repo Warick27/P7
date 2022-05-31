@@ -33,13 +33,16 @@
           </div>
           <div class="post_comment">
             <div class="post_comment_info">
-              <button class="btn-style">
-                <img
-                  src="../assets/heart-regular.svg"
-                  alt="J'aime"
-                  id="heart"
-                />
-              </button>
+              <div class="heart_style">
+                <p>{{ item.like }}</p>
+                <button class="btn-style" @click="addLike">
+                  <img
+                    src="../assets/heart-regular.svg"
+                    alt="J'aime"
+                    id="heart"
+                  />
+                </button>
+              </div>
               <a class="bt-style" href="#">
                 <img
                   src="../assets/comment-regular.svg"
@@ -85,6 +88,19 @@ export default {
         month = datePart[1],
         day = datePart[2];
       return "Publié le " + day + "." + month + "." + year;
+    },
+    addLike() {
+      let idUser = localStorage.getItem("id");
+      let idPost = this.$route.params.id;
+      axios
+        .post(
+          "like",
+          { userId: idUser, postId: idPost },
+          { headers: { Authorization: "Bearer " + this.token } }
+        )
+        .then((response) => {
+          this.posts = response.data;
+        });
     },
   },
 };
@@ -208,70 +224,14 @@ h1 {
   width: 70%;
 }
 
-Reset CSS
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-p,
-figure,
-figcaption {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
+.heart_style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-body {
-  line-height: 1;
-}
-
-body,
-html,
-aside,
-h2 {
-  margin: 0;
-  padding: 0;
-}
-
-ol,
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.heart_style p {
+  margin: auto 5px;
+  font-size: 22px;
 }
 </style>

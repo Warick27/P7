@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userCtrl = require("../controllers/user");
-const multer = require('../middleware/multer-config');
+// const multer = require('../middleware/multer-config');
 
 // Middleware gérant l'authentification
 const auth = require('../middleware/auth');
@@ -14,7 +14,7 @@ const validation = require('../middleware/validation');
 
 router.post("/signup", validation, userCtrl.signup);
 router.post("/login", userCtrl.login);
-router.put("/:id", multer, userCtrl.modify);
+router.put("/:id", userCtrl.modify);
 router.delete("/:id", auth, userCtrl.delete);
 router.get("/", auth, userCtrl.getAll);
 router.get("/:id", auth, userCtrl.getOne);

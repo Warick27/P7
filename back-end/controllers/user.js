@@ -97,7 +97,7 @@ exports.delete = (req, response, next) => {
                     let sql = `DELETE FROM groupomania.user WHERE id=?`;
                     pool.execute(sql, [req.params.id], function (err, result) {
                         if (err) result.status(400).json({ error });
-                        response.status(200).json({ message: `Le compte numéro ${req.params.id} a bien été supprimé` });
+                        response.status(200).json({ pseudo: user.pseudo, message: `Le compte numéro ${req.params.id} a bien été supprimé` });
                     });
                 })
                 .catch(error => response.status(500).json({ error }));
@@ -106,24 +106,27 @@ exports.delete = (req, response, next) => {
   })
 }
 
-// A revoir car problème password, demander donnée req.body.previousPassword
+// Ok
 exports.modify = (req, res, next) => {
   let search = `SELECT * FROM groupomania.user WHERE id=?`;
-  pool.execute(search, [req.params.id], function (err, res) {
-    let user = res[0];
+  pool.execute(search, [req.params.id], function (err, result) {
+    if(err) throw err;
+    let user = result[0];
+    console.log(user);
     // previousPassword
-    bcrypt.compare(req.body.password, user.password)
+    bcrypt.compare(req.body.oldPassword, user.password)
     .then(match => {
+      console.log(match);
         if (!match) {
             return res.status(401).json({ error: " Mot de passe incorrect !" });
         } else {
-            bcrypt.hash(req.body.password, 10)
+            bcrypt.hash(req.body.newPassword, 10)
                 .then(hash => {
-                    let sql = `UPDATE groupomania.user SET password=? WHERE id=?`;
-                    pool.execute(sql, [req.params.id], function (err, result) {
+                    let sql = `UPDATE groupomania.user SET password=?, pseudo=? WHERE id=?`;
+                    pool.execute(sql, [hash, req.body.pseudo, req.params.id], function (err, resultat) {
                         if (err) throw err;
-                        console.log(result);
-                        res.status(200).json({ message: `Le compte numéro ${req.params.id} a bien été modifié` });
+                        console.log(resultat);
+                        res.status(201).json({ message: `Le compte numéro ${req.params.id} a bien été modifié` });
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
