@@ -31,8 +31,8 @@
         Consulter mon profil
       </button>
     </div>
-    <div id="myInfo">
-      <div v-if="mode == 'Lecture'">
+    <div>
+      <div v-if="mode == 'Lecture'" id="myPrivateInfo">
         <div v-for="item in user" :key="item.postId">
           <p>Pseudo : {{ item.pseudo }}</p>
           <p>Email : {{ item.email }}</p>
@@ -40,10 +40,11 @@
       </div>
 
       <ProfileM v-else-if="mode == 'Changement'" id="signup" />
-      <form @submit.prevent="handleDelete" v-else>
+      <form @submit.prevent="handleDelete" v-else id="deleteCompte">
         <h4>Veuillez entrer votre mot de passe pour supprimer votre compte</h4>
+        <h6>Attention, cette action est irréversible !</h6>
         <div class="form-group">
-          <label for="form-control password">Password</label>
+          <label for="form-control password"></label>
           <input
             type="password"
             class="form-control password"
@@ -114,24 +115,7 @@ export default {
       localStorage.removeItem("pseudo");
       this.$router.push("/");
     },
-    // editToggle() {
-    //   if (this.mode == "Changement") {
-    //     event.target.textContent = "Consulter mon profil";
-    //   } else if (this.mode !== "Changement") {
-    //     event.target.textContent = "Modifier mon profil";
-    //   }
-    //   else (this.mode == 'Suppression' || this.mode == 'Lecture') {
-    //     event.target.textContent = 'Modifier mon profil'
-    //   }
   },
-  // deleteToggle() {
-  //   if (this.mode == "Suppression") {
-  //     event.target.textContent = "Consulter mon profil";
-  //   } else if (this.mode !== "Suppression") {
-  //     event.target.textContent = "Supprimer mon compte ";
-  //   }
-  // },
-  //   },
 };
 </script>
 <style scoped>
@@ -142,8 +126,12 @@ export default {
   justify-content: space-around;
   font-size: 1px;
 }
+h6 {
+  color: #fd2d01;
+  margin-bottom: 30px;
+}
 @media screen and (min-width: 768px) {
-  #myInfo {
+  #myPrivateInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,17 +140,37 @@ export default {
     margin: 0 35%;
     /* width: fit-content; */
   }
+  #myInfo p,
+  #myPrivateInfo p {
+    margin: 25px 10px;
+    width: 300px;
+  }
+  #deleteCompte {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    top: 35%;
+  }
 }
-
 #actions {
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 5%;
   left: 50%;
+  display: flex;
+  flex-direction: row;
+  top: 10%;
+  margin-bottom: 50px;
+}
+#actions button {
+  width: 150px;
+  margin: 50px;
 }
 #signup {
   margin-top: 10%;
 }
+
 form h4 {
   margin-bottom: 5% auto;
 }
@@ -186,27 +194,53 @@ form input {
     top: 10%;
     margin-bottom: 20px;
   }
-  #actions button {
+  #actions button,
+  #deleteCompte button {
     width: 150px;
+    margin: 10px;
+  }
+  #deleteCompte button {
+    align-self: center;
   }
   #signup {
     margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
   #myInfo {
     display: flex;
-    margin-top: 10px 0;
-    position: absolute;
+    margin-top: 80px;
+    /* position: absolute;
     transform: translate(-50%, -50%);
     top: 30%;
-    left: 50%;
+    left: 50%; */
     justify-content: center;
     text-align: justify;
     font-size: large;
     /* margin: 0 35%; */
     background-color: white;
   }
-  #myInfo p {
+  #myPrivateInfo {
+    display: flex;
+    margin-top: 120px;
+
+    justify-content: center;
+    text-align: justify;
+    font-size: large;
+    background-color: white;
+  }
+  #deleteCompte {
+    display: flex;
+    flex-direction: column;
+    /* font-size: large; */
+    margin-top: 120px;
+  }
+
+  #myInfo p,
+  #myPrivateInfo p {
     margin: 25px 10px;
   }
 }

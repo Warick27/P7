@@ -32,6 +32,13 @@
         </li>
       </ul>
     </div>
+    <div>
+      <img
+        src="../assets/icon-left-font.png"
+        alt="Logo Groupomania"
+        id="homeLogo"
+      />
+    </div>
   </div>
 </template>
 
@@ -70,7 +77,22 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+#homeLogo {
+  z-index: -1;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 50% !important;
+  height: 50%;
+}
+@media screen and (max-width: 768px) {
+  #homeLogo {
+    width: 80% !important;
+    top: 45%;
+  }
+}
 #actions {
   display: flex;
   justify-content: space-around;
@@ -94,7 +116,7 @@ export default {
     flex-direction: column;
   }
   #actions button {
-margin: 10px;
+    margin: 10px;
   }
 }
 </style>

@@ -68,12 +68,12 @@ export default {
 #message {
   height: 100px;
 }
-@media screen and (min-width: 1366px) {
+/* @media screen and (min-width: 1366px) {
   .containerPost {
     top: 50%;
     min-width: 450px;
   }
-}
+} */
 h2 {
   text-align: center;
 }
@@ -88,7 +88,7 @@ h2 {
   font-size: 1.2rem;
   line-height: 1.25rem;
   font-weight: 500;
-  color: rgb(55 65 81);
+  /* color: rgb(55 65 81); */
   margin-bottom: 15px;
 }
 
@@ -106,11 +106,20 @@ h2 {
   flex: 1;
 }
 
-.field_input::placeholder {
-  color: #aaaaaa;
-}
+/* .field_input::placeholder {
+  color: #dfdbdb23;
+} */
 
 .validation {
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .containerCom {
+    margin: 20px auto;
+    border: 1px solid #FFD7D7;
+    border-radius: 10px;
+    width: 100%;
+  }
 }
 </style>

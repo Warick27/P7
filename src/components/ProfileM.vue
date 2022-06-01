@@ -1,27 +1,26 @@
 <template>
   <div class="containerProfile">
-    <h1 class="titre">Modifications du profil</h1>
+    <h4 class="titre">Modifications du profil</h4>
     <form class="edition" @submit.prevent="handleMaj">
       <div class="form-group">
         <label for="password"
-          >Ancien password :<input
+          ><input
             type="password"
             class="form-control password"
             v-model.trim="oldPassword"
-            placeholder="password"
+            placeholder="Ancien password"
+            autocomplete="off"
         /></label>
         <label for="password"
-          >Nouveau password :<input
+          ><input
             type="password"
             class="form-control password"
             v-model.trim="newPassword"
-            placeholder="password"
+            placeholder="Nouveau password"
         /></label>
         <!-- <span v-if="errors.password">{{ errors.password }}</span> -->
-      </div>
-      <div class="form-group">
         <label for="pseudo" class="field_label"
-          >Pseudo :<input
+          ><input
             type="text"
             class="form-control pseudo"
             v-model="pseudo"
@@ -86,10 +85,17 @@ export default {
 
 <style scoped>
 @media screen and (max-width: 768px) {
-  /* #containerProfile {
-    margin-top: 200px;
-  }
-  .edition {
-  } */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+}
+.form-group label {
+  margin: 10px auto;
+}
+.validation {
+  margin: 10px auto;
+}
 }
 </style>

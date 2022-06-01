@@ -109,11 +109,11 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-.comFeed {
-  margin: 5px auto;
-  border: 1px solid #4E5166;
-  border-radius: 10px;
-  width: 100%;
-}
+  .comFeed {
+    margin: 5px auto;
+    border: 1px solid #4e5166;
+    border-radius: 10px;
+    width: 100%;
+  }
 }
 </style>

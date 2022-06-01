@@ -16,7 +16,7 @@
             <li>{{ item.pseudo }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
-              <button class="btn-style">
+              <button class="">
                 <img
                   src="../assets/ellipsis-solid.svg"
                   alt="profil"
@@ -44,13 +44,13 @@
             <div class="post_comment_info">
               <div class="heart_style">
                 <p>{{ item.like }}</p>
-                <button class="btn-style" @click="addLike">
+                <a class="bt-style" @click="addLike">
                   <img
                     src="../assets/heart-regular.svg"
                     alt="J'aime"
                     id="heart"
                   />
-                </button>
+                </a>
               </div>
               <a class="bt-style" href="#">
                 <img
@@ -189,7 +189,7 @@ a {
 
 .post {
   margin: 20px auto;
-  border: 1px solid black;
+  border: 1px solid #FFD7D7;
   border-radius: 10px;
   width: 50%;
 }
@@ -199,14 +199,14 @@ a {
   width: 20px;
   background-color: transparent;
 }
-.btn-style {
-  background-color: white;
+/* .btn-style {
+  background-color: #fd2d01;
   border: none;
   cursor: pointer;
 }
 .btn-style:hover {
-  color: red;
-}
+  background-color: #fd2b019b;
+} */
 
 #com {
   width: 20px;

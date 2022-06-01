@@ -84,7 +84,7 @@ html,
 }
 
 .navbar-light {
-  background-color: #fff;
+  background-color: #FFFFFF;
   box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
 }
 
