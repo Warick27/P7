@@ -60,9 +60,6 @@ export default {
   watch: {},
   methods: {
     async handleMaj() {
-      console.log(this.oldPassword);
-      console.log(this.newPassword);
-      console.log(this.pseudo);
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("id");
       const response = await axios.put(
@@ -75,7 +72,6 @@ export default {
         { headers: { Authorization: "Bearer " + token } }
       );
       console.log(response);
-      localStorage.setItem("id", response.data.userId);
       // localStorage.setItem("token", response.data.token);
       // localStorage.setItem("pseudo", response.data.pseudo);
     },
@@ -85,17 +81,17 @@ export default {
 
 <style scoped>
 @media screen and (max-width: 768px) {
-.form-group {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 90%;
-}
-.form-group label {
-  margin: 10px auto;
-}
-.validation {
-  margin: 10px auto;
-}
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+  }
+  .form-group label {
+    margin: 10px auto;
+  }
+  .validation {
+    margin: 10px auto;
+  }
 }
 </style>

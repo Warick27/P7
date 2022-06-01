@@ -79,51 +79,18 @@ exports.modify = (req, res, next) => {
           res.status(201).json({ message: `post modifié` });
         }
       );
-    } 
-    // else {
-    //     const updateInfo = {
-    //       title: req.body.title,
-    //       textPost: req.body.text,
-    //     };
-    //     let updatePost = `UPDATE groupomania.post SET title=?, textPost=? WHERE postId=?`;
-    //     pool.execute(
-    //       updatePost,
-    //       [
-    //         updateInfo.title,
-    //         updateInfo.textPost,
-    //         req.params.id,
-    //       ],
-    //       function (err, result) {
-    //         if (err) res.status(400).json({ err });
-    //         result.status(201).json({ message: `post modifié` });
-    //       }
-    //     );
-    // }
-
-
-
-});
+    }
+  });
 };
-// let searchPost = `SELECT * FROM groupomania.post WHERE postId=?;`;
-// pool.execute(searchPost, [req.params.id], function (err, result) {
-//     if (err) res.status(400).json({ err });
-//     let found = result[0];
-//     // console.log(found);
-//     if (found) {
-//         let updatePost = `UPDATE groupomania.post SET title=? WHERE postId=?`;
-//         pool.execute(updatePost, [req.body.title, req.params.id],function (err, result) {
-//             if (err) res.status(400).json({ err });
-//             result.status(201).json({ message: `post modifié` });
-//         });
-//     };
-// })
 
 // à tester
 exports.delete = (req, res, next) => {
   let search = `SELECT * FROM groupomania.post WHERE postId=?`;
   pool.execute(search, [req.params.id], function (err, resultat) {
+    console.log("je commence");
     if (err) res.status(400).json({ err });
     let found = resultat[0];
+    console.log(found);
     if (!found)
       res
         .status(400)

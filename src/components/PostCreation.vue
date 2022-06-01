@@ -10,8 +10,7 @@
           class="field_input"
           placeholder="Titre"
       /></label>
-      <label for="message" class="field_label_textaera"
-        >
+      <label for="message" class="field_label_textaera">
         <textarea
           name="message"
           id="message"
@@ -58,7 +57,6 @@ export default {
     handleSubmit() {
       const id = localStorage.getItem("id");
       let token = localStorage.getItem("token");
-      console.log(id);
       const fd = new FormData();
       fd.append("image", this.selectedFile, this.selectedFile.name);
       fd.append("title", this.titre);
@@ -85,7 +83,7 @@ export default {
   transform: translate(-50%, -50%);
   top: 45%;
   left: 50%;
-  border: 1px solid #FFD7D7;
+  border: 1px solid #ffd7d7;
   /* min-width: 350px; */
   width: 70vw;
   background: white;
@@ -115,7 +113,8 @@ h2 {
   margin-top: 0.25rem;
 }
 
-.field_label, .field_label_textaera {
+.field_label,
+.field_label_textaera {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
@@ -144,13 +143,11 @@ h2 {
   color: #aaaaaa;
 }
 @media screen and (max-width: 768px) {
-.containerPost {
-  width: 100%;
+  .containerPost {
+    width: 100%;
+  }
+  .field_label_textaera {
+    margin: 10px auto;
+  }
 }
-.field_label_textaera {
-  margin: 10px auto;
-}
-}
-  
-
 </style>

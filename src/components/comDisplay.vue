@@ -5,16 +5,6 @@
         <ul class="comment_user_band">
           <li>{{ item.pseudo }}</li>
           <li>{{ formatDate(item.date) }}</li>
-          <li>
-            <!-- :href="'/post/' + item.postId" -->
-            <div class="btn-style" id="test">
-              <img
-                src="../assets/ellipsis-solid.svg"
-                alt="profil"
-                id="ellipsis"
-              />
-            </div>
-          </li>
         </ul>
       </div>
       <div class="message">
@@ -33,6 +23,7 @@ export default {
   data() {
     return {
       comment: [],
+      count: [],
     };
   },
   created() {
@@ -41,9 +32,6 @@ export default {
     axios
       .get("comment/" + id, { headers: { Authorization: "Bearer " + token } })
       .then((response) => {
-        // console.log(response.data[0].commentId);
-        // const data = JSON.stringify(response.data);
-        // console.log(typeof data);
         this.comment = response.data;
         console.log(this.comment);
       });

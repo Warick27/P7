@@ -104,10 +104,10 @@ export default {
       let token = localStorage.getItem("token");
       const response = await axios.delete(
         `user/${userId}`,
-        { headers: { Authorization: "Bearer " + token } },
+        
         {
           data: { password: this.password },
-        }
+        },{ headers: { Authorization: "Bearer " + token } },
       );
       console.log(response);
       localStorage.removeItem("token");

@@ -1,28 +1,28 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
-    <h3>Se connecter</h3>
-    <div class="form-group">
-      <label for="form-control email">Email</label>
-      <input
-        type="email"
-        class="form-control email"
-        v-model="email"
-        placeholder="Email"
-      />
+    <h3 id="connect">Se connecter</h3>
+    <div class="containerLogin">
+      <div class="form-group">
+        <label for="form-control email"></label>
+        <input
+          type="email"
+          class="form-control email"
+          v-model="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="form-control password"></label>
+        <input
+          type="password"
+          class="form-control password"
+          v-model="password"
+          placeholder="password"
+        />
+      </div>
+      <button class="btn">Se connecter</button>
     </div>
-
-    <div class="form-group">
-      <label for="form-control password">Password</label>
-      <input
-        type="password"
-        class="form-control password"
-        v-model="password"
-        placeholder="password"
-      />
-    </div>
-
-    <button class="btn btn-primary btn-block">Se connecter</button>
   </form>
 </template>
 <script>
@@ -55,3 +55,35 @@ export default {
   },
 };
 </script>
+<style>
+.btn {
+  color: white;
+}
+@media screen and (max-width: 768px) {
+  #connect {
+    margin-top: 30px;
+  }
+  .containerLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .containerLogin button {
+    margin-top: 20px;
+  }
+  /* .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+  } */
+  .form-group label {
+    margin: 10px auto;
+  }
+  .validation {
+    margin: 10px auto;
+  }
+}</style>

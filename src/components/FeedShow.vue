@@ -21,18 +21,6 @@
             <!-- <li id="postId">{{ item.postId }}</li> -->
             <li>{{ item.pseudo }}</li>
             <li>{{ formatDate(item.date) }}</li>
-            <li>
-              <div class="btn-style" @click="revealMenu">
-                <!-- <a class="btn-style" 
-              :href="'/post/' + item.postId"
-              > -->
-                <img
-                  src="../assets/ellipsis-solid.svg"
-                  alt="profil"
-                  id="ellipsis"
-                />
-              </div>
-            </li>
           </ul>
           <div class="manage">
             <p>modifier</p>
@@ -43,9 +31,9 @@
           </h1>
         </div>
         <div class="post_image">
-          <div class="picto">
+          <a class="picto" :href="'/post/' + item.postId">
             <img :src="item.imageUrl" />
-          </div>
+          </a>
         </div>
         <div>
           <div class="post_desc">

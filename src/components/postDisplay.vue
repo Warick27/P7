@@ -15,15 +15,7 @@
           <ul class="post_user_band">
             <li>{{ item.pseudo }}</li>
             <li>{{ formatDate(item.date) }}</li>
-            <li>
-              <button class="">
-                <img
-                  src="../assets/ellipsis-solid.svg"
-                  alt="profil"
-                  id="ellipsis"
-                />
-              </button>
-            </li>
+            <li></li>
           </ul>
           <h1>
             {{ item.title }}
@@ -43,7 +35,7 @@
           <div class="post_comment">
             <div class="post_comment_info">
               <div class="heart_style">
-                <p>{{ item.like }}</p>
+                <p>{{ item.likes }}</p>
                 <a class="bt-style" @click="addLike">
                   <img
                     src="../assets/heart-regular.svg"
@@ -52,7 +44,8 @@
                   />
                 </a>
               </div>
-              <a class="bt-style" href="#">
+              <a class="bt-style comCount" href="#">
+                <p class="count">{{ count[0].count }}</p>
                 <img
                   src="../assets/comment-regular.svg"
                   alt="Commentaire"
@@ -77,6 +70,7 @@ export default {
   data() {
     return {
       post: [],
+      count: [0],
     };
   },
   created() {
@@ -87,6 +81,14 @@ export default {
       .then((response) => {
         this.post = response.data;
         console.log(this.post);
+      });
+    axios
+      .get("/comment/count/" + id, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        this.count = res.data;
+        console.log(this.count);
       });
   },
   methods: {
@@ -132,7 +134,6 @@ export default {
     },
     postDelete() {
       const idUser = localStorage.getItem("id");
-      console.log(idUser);
       const idAuthor = this.post[0].authorId;
       if (idAuthor == idUser) {
         this.delete();
@@ -146,25 +147,20 @@ export default {
       const idPost = this.$route.params.id;
       const idUser = localStorage.getItem("id");
       const token = localStorage.getItem("token");
-      console.log(idPost);
-      console.log(idUser);
-      const fd = new FormData();
-      fd.append("userId", idUser);
-      fd.append("postId", idPost);
       const response = await axios
         .delete(
-          `post/${idPost}`,
+          `post/${idPost}`, { data: { userId: idUser } },
           {
             headers: { Authorization: "Bearer " + this.token },
           },
-          { data: { userId: idUser } },
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         )
         .then((response) => {
-          alert(response.data);
+          alert(response[0].data + "Publication supprimée !");
         });
+        this.$router.push("/");
     },
   },
 };
@@ -189,7 +185,7 @@ a {
 
 .post {
   margin: 20px auto;
-  border: 1px solid #FFD7D7;
+  border: 1px solid #ffd7d7;
   border-radius: 10px;
   width: 50%;
 }
@@ -210,6 +206,15 @@ a {
 
 #com {
   width: 20px;
+}
+.comCount {
+  display: flex;
+  align-items: center;
+}
+.count {
+  margin-right: 10px;
+  margin: auto 5px;
+  font-size: 22px;
 }
 
 .picto {
@@ -240,53 +245,15 @@ h1 {
   margin: 20px 20px 10px;
   padding: 10px;
 }
-.field {
-  margin-top: 0.25rem;
-}
 
-.field_label {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  color: rgb(55 65 81);
-  margin-bottom: 15px;
-}
-
-.field_input {
-  display: inline-flex;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  border-radius: 0.375rem;
-  padding: 8px;
-  border: none;
-  background: #f2f2f2;
-  font-weight: 500;
-  font-size: 16px;
-  color: black;
-  flex: 1;
-}
-
-.field_input::placeholder {
-  height: 30px;
-  color: #aaaaaa;
-}
-
-.field_label {
-  width: 60%;
-  margin: 10px auto;
-  border: 1px solid #0b040424;
-  border-radius: 10px;
-}
-
-.post_comment_add {
+/* .post_comment_add {
   margin: 10px auto 20px;
   text-align: center;
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
   width: 70%;
-}
+} */
 
 .heart_style {
   display: flex;
