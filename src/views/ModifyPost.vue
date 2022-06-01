@@ -71,12 +71,10 @@ export default {
         const id = localStorage.getItem("id");
         let token = localStorage.getItem("token");
         const postId = this.$route.params.id;
-
         const fd = new FormData();
         fd.append("title", this.titre);
         fd.append("text", this.message);
         fd.append("userId", id);
-
         const response = axios.put(
           `post/${postId}`,
           fd,
@@ -86,7 +84,7 @@ export default {
           }
         );
         console.log(response);
-        // this.$router.push("/");
+        this.$router.push("/");
       } else {
         const id = localStorage.getItem("id");
         let token = localStorage.getItem("token");

@@ -82,9 +82,9 @@ export default {
   z-index: -1;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 60%;
   left: 50%;
-  width: 50% !important;
+  width: 40% !important;
   height: 50%;
 }
 @media screen and (max-width: 768px) {

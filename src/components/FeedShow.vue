@@ -1,9 +1,3 @@
-<!-- <script setup>
-  const vm = getCurrentInstance();
-  const handleClick = () => {
-    console.log(vm);
-  }
-</script> -->
 <template>
   <div id="news">
     <!-- <div class="hello">Bienvenue User Name !</div> -->
@@ -40,12 +34,13 @@
             <p class="authComment">
               {{ item.textPost }}
             </p>
+            <div id="postId">{{ item.postId }}</div>
           </div>
           <div class="post_comment">
             <div class="post_comment_info">
               <div class="heart_style">
                 <p>{{ item.likes }}</p>
-                <a class="coeur" @click="addLike">
+                <a class="coeur" @click.prevent="addLike(item.postId)">
                   <img
                     src="../assets/heart-regular.svg"
                     alt="J'aime"
@@ -92,38 +87,50 @@ export default {
   },
   methods: {
     formatDate(input) {
-      const datePart = input.match(/\d+/g),
-        year = datePart[0].substring(0),
-        month = datePart[1],
-        day = datePart[2];
-      return "Publié le " + day + "." + month + "." + year;
+      if (input !== undefined) {
+        console.log(input);
+        const datePart = input.match(/\d+/g),
+          year = datePart[0].substring(0),
+          month = datePart[1],
+          day = datePart[2];
+        return "Publié le " + day + "." + month + "." + year;
+      }
     },
-    addLike() {
+    addLike(idPost) {
       let idUser = localStorage.getItem("id");
-      let idPost = document.getElementById("postId").innerText;
+
+      console.log(idPost);
       axios
         .post(
           "like",
           { userId: idUser, postId: idPost },
           { headers: { Authorization: "Bearer " + this.token } }
         )
-        .then((response) => {
-          this.posts = response.data;
+        .then(() => {
+          axios
+            .get("post", { headers: { Authorization: "Bearer " + this.token } })
+            .then((response) => {
+              this.posts = response.data;
+              console.log(this.posts);
+            });
         });
     },
-    revealMenu() {
-      const visible = document.querySelector(".manage").style.display;
-      if (visible.style === "none") {
-        visible.style = "block";
-      } else {
-        visible.style = "none";
-      }
-    },
+    //   revealMenu() {
+    //     const visible = document.querySelector(".manage").style.display;
+    //     if (visible.style === "none") {
+    //       visible.style = "block";
+    //     } else {
+    //       visible.style = "none";
+    //     }
+    //   },
   },
 };
 </script>
 
 <style scoped>
+#postId {
+  display: none;
+}
 * {
   box-sizing: border-box;
   color: #4e5166;
