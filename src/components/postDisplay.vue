@@ -1,10 +1,19 @@
 <template>
   <div id="news">
+    <div class="action">
+      <button class="btn btn-primary btn-block" @click="postmodify">
+        Modifier
+      </button>
+      <button class="btn btn-primary btn-block" @click="postDelete">
+        Supprimer
+      </button>
+    </div>
+
     <div class="feed">
       <article class="post" v-for="item in post" :key="item.postId">
         <div class="post_user">
           <ul class="post_user_band">
-            <li>{{ item.authorId }}</li>
+            <li>{{ item.pseudo }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
               <button class="btn-style">
@@ -60,6 +69,7 @@
 
 <script>
 import axios from "axios";
+// import router from "../router";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -75,10 +85,8 @@ export default {
     axios
       .get("post/" + id, { headers: { Authorization: "Bearer " + token } })
       .then((response) => {
-        // console.log(response.data[0].postId);
-        // const data = JSON.stringify(response.data);
-        // console.log(typeof data);
         this.post = response.data;
+        console.log(this.post);
       });
   },
   methods: {
@@ -102,6 +110,62 @@ export default {
           this.posts = response.data;
         });
     },
+    postmodify() {
+      let idUser = localStorage.getItem("id");
+      let idPost = this.$route.params.id;
+      const idAuthor = this.post[0].authorId;
+      if (idAuthor == idUser) {
+        console.log(idAuthor + " est égale à " + idUser);
+        this.$router.push(`/post/modify/${idPost}`);
+      } else {
+        alert(
+          " Vous n'êtes pas l'auteur de ce post. Vous ne pouvez pas le modifier"
+        );
+      }
+    },
+    showActions() {
+      const idUser = localStorage.getItem("id");
+      const idAuthor = this.post[0].authorId;
+      if (idAuthor == idUser) {
+        this.mode = "true";
+      }
+    },
+    postDelete() {
+      const idUser = localStorage.getItem("id");
+      console.log(idUser);
+      const idAuthor = this.post[0].authorId;
+      if (idAuthor == idUser) {
+        this.delete();
+      } else {
+        alert(
+          " Vous n'êtes pas l'auteur de ce post. Vous ne pouvez pas le supprimer"
+        );
+      }
+    },
+    async delete() {
+      const idPost = this.$route.params.id;
+      const idUser = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+      console.log(idPost);
+      console.log(idUser);
+      const fd = new FormData();
+      fd.append("userId", idUser);
+      fd.append("postId", idPost);
+      const response = await axios
+        .delete(
+          `post/${idPost}`,
+          {
+            headers: { Authorization: "Bearer " + this.token },
+          },
+          { data: { userId: idUser } },
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        )
+        .then((response) => {
+          alert(response.data);
+        });
+    },
   },
 };
 </script>
@@ -115,9 +179,9 @@ export default {
 a {
   text-decoration: none;
 }
-.hello {
-  text-align: center;
-  font-weight: bold;
+.action {
+  display: flex;
+  justify-content: space-around;
 }
 .feed {
   margin: 10px auto;
@@ -233,5 +297,24 @@ h1 {
 .heart_style p {
   margin: auto 5px;
   font-size: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .action {
+    margin-top: 10px;
+    flex-direction: column;
+  }
+
+  .action button {
+    margin: 10px;
+    color: white;
+  }
+
+  .post {
+    width: 100%;
+  }
+  .feed {
+    margin: 0 auto;
+  }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit">
+    <div v-if="error" class="alert alert-danger">{{ error }}</div>
     <h3>Se connecter</h3>
     <div class="form-group">
       <label for="form-control email">Email</label>
@@ -33,18 +34,23 @@ export default {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
   methods: {
     async handleSubmit() {
-      const response = await axios.post("/user/login", {
-        email: this.email,
-        password: this.password,
-      });
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("id", response.data.userId);
-      localStorage.setItem("pseudo", response.data.pseudo);
-      this.$router.push("/");
+      try {
+        const response = await axios.post("/user/login", {
+          email: this.email,
+          password: this.password,
+        });
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.userId);
+        localStorage.setItem("pseudo", response.data.pseudo);
+        this.$router.push("/");
+      } catch (e) {
+        this.error = "Email ou mot de passe invalide";
+      }
     },
   },
 };

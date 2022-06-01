@@ -24,7 +24,8 @@ exports.create = (req, res, next) => {
 
 // ok rajout erreur "Il n'y a pas de commentaire à ce post"
 exports.getAll = (req, res, next) => {
-    let allComment = `SELECT * FROM groupomania.comment WHERE postId=? ORDER BY date DESC`;
+    
+    let allComment = `SELECT postId, authorId, pseudo, date, commentaire FROM groupomania.comment INNER JOIN groupomania.user on authorId = user.id WHERE postId=? ORDER BY postId DESC;`;
     pool.execute(allComment, [req.params.id], function (err, result) {
         const found = result[0];
         console.log(found);

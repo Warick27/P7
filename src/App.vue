@@ -3,6 +3,7 @@
 <template>
   <div id="app">
     <NaV />
+    <img src="./assets/icon-left-font.svg" alt="Logo Groupomania" id="logo" />
     <div class="auth-wrapper">
       <div class="auth-inner">
         <router-view />
@@ -27,11 +28,12 @@ export default {
 
 * {
   box-sizing: border-box;
+  color: #4e5166;
 }
 
 body {
   /* background: #1c8ef9 !important; */
-  background: #f0f2f5;
+  background: #ffd7d7;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -58,9 +60,27 @@ html,
   width: 100%;
   height: 100%;
 }
+.btn {
+  background-color: #fd2d01;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #fd2b019b;
+}
 
 #app {
   text-align: center;
+}
+#logo {
+  width: 10vw;
+  height: 50vh;
+  z-index: 0;
+  overflow: hidden;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 20.5%;
+  left: 8%;
 }
 
 .navbar-light {
@@ -77,6 +97,7 @@ html,
   transform: translate(-50%, -50%);
   top: 60%;
   left: 50%;
+  z-index: 1;
 }
 
 .auth-inner {
@@ -104,6 +125,21 @@ html,
   font-weight: 400;
 }
 
+@media screen and (max-width: 768px) {
+  #logo {
+    display: none;
+  }
+  .auth-inner {
+    width: 100%;
+    margin: auto;
+    background: #fff;
+    box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
+    /* padding: 40px 55px 45px 55px; */
+    padding: 5px;
+    border-radius: 15px;
+    transition: all 0.3s;
+  }
+}
 /* Reset CSS*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126

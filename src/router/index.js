@@ -37,6 +37,11 @@ const router = createRouter({
       component: () => import("../views/AddCom.vue"),
     },
     {
+      path: "/post/modify/:id/",
+      name: "modification de commentaire",
+      component: () => import("../views/ModifyPost.vue"),
+    },
+    {
       path: "/users/:id",
       name: "users",
       component: () => import("../views/users.vue"),

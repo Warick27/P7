@@ -84,4 +84,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@media screen and (max-width: 768px) {
+  /* #containerProfile {
+    margin-top: 200px;
+  }
+  .edition {
+  } */
+}
+</style>

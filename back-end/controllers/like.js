@@ -14,7 +14,7 @@ exports.getLike = (req, res, next) => {
     const existe = keys.find((element) => (element = couple));
     console.log(existe);
     if (!existe) {
-      let queryNo = `UPDATE groupomania.post SET post.like = post.like + 1 WHERE postId=?`;
+      let queryNo = `UPDATE groupomania.post SET post.likes = post.likes + 1 WHERE postId=?`;
       pool.execute(queryNo, [req.body.postId], function (err, result) {
         console.log("like+1");
         if (err) res.status(400).json({ err });
@@ -31,7 +31,7 @@ exports.getLike = (req, res, next) => {
         );
       });
     } else {
-      let queryYes = `UPDATE groupomania.post SET post.like = post.like - 1 WHERE postId=?`;
+      let queryYes = `UPDATE groupomania.post SET post.likes = post.likes - 1 WHERE postId=?`;
       pool.execute(queryYes, [req.body.postId], function (err, result) {
         console.log("like-1");
         if (err) res.status(400).json({ err });

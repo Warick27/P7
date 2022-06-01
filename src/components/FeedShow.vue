@@ -18,8 +18,8 @@
         <!-- <article class="post"> -->
         <div class="post_user">
           <ul class="post_user_band">
-            <li id="postId">{{ item.postId }}</li>
-            <li>{{ item.authorId }}</li>
+            <!-- <li id="postId">{{ item.postId }}</li> -->
+            <li>{{ item.pseudo }}</li>
             <li>{{ formatDate(item.date) }}</li>
             <li>
               <div class="btn-style" @click="revealMenu">
@@ -56,14 +56,14 @@
           <div class="post_comment">
             <div class="post_comment_info">
               <div class="heart_style">
-                <p>{{ item.like }}</p>
-                <button class="btn-style" @click="addLike">
+                <p>{{ item.likes }}</p>
+                <a class="coeur" @click="addLike">
                   <img
                     src="../assets/heart-regular.svg"
                     alt="J'aime"
                     id="heart"
                   />
-                </button>
+                </a>
               </div>
               <a class="bt-style" :href="'/post/' + item.postId + '/comment'">
                 <!--@click="addComment()"  -->
@@ -99,6 +99,7 @@ export default {
       .get("post", { headers: { Authorization: "Bearer " + token } })
       .then((response) => {
         this.posts = response.data;
+        console.log(this.posts);
       });
   },
   methods: {
@@ -123,8 +124,8 @@ export default {
         });
     },
     revealMenu() {
-      const visible = (document.querySelector(".manage").style.display);
-      if ((visible.style === "none")) {
+      const visible = document.querySelector(".manage").style.display;
+      if (visible.style === "none") {
         visible.style = "block";
       } else {
         visible.style = "none";
@@ -137,7 +138,7 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
-  color: black;
+  color: #4e5166;
   font-family: "Raleway", sans-serif;
 }
 a {
@@ -153,7 +154,7 @@ a {
 
 .post {
   margin: 50px auto;
-  border: 1px solid black;
+  border: 1px solid #fcdbd5;
   border-radius: 10px;
   width: 50%;
   position: relative;
@@ -164,14 +165,14 @@ a {
   width: 20px;
   background-color: transparent;
 }
-.btn-style {
+/* .btn-style {
   background-color: white;
   border: none;
   cursor: pointer;
 }
 .btn-style:hover {
   color: red;
-}
+} */
 
 #com {
   width: 20px;
@@ -223,5 +224,17 @@ h1 {
   top: 5%;
   left: 105%;
   display: none;
+}
+.coeur {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: 100%;
+  }
+  .feed {
+    margin: 0 auto;
+  }
 }
 </style>

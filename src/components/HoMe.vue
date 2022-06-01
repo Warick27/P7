@@ -2,7 +2,7 @@
   <div>
     <!-- Voir la Nav pour faire disparaitre Home quand sur page profil -->
     <div v-if="user.length > 0">
-      <h3>Bienvenue, {{ user.pseudo }}</h3>
+      <h3 id="welcome">Bienvenue, {{ user.pseudo }}</h3>
       <div id="actions">
         <button class="btn btn-primary btn-block" @click.prevent="clickProfile">
           Mon profil
@@ -84,5 +84,17 @@ export default {
   justify-content: center;
   padding-left: 0;
   margin-top: 1vh;
+}
+
+@media screen and (max-width: 768px) {
+  #welcome {
+    margin-top: 20px;
+  }
+  #actions {
+    flex-direction: column;
+  }
+  #actions button {
+margin: 10px;
+  }
 }
 </style>

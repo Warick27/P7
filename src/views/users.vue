@@ -140,16 +140,20 @@ export default {
   flex-direction: column;
   height: 50vh;
   justify-content: space-around;
+  font-size: 1px;
 }
-#myInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: justify;
-  font-size: large;
-  margin: 0 35%;
-  /* width: fit-content; */
+@media screen and (min-width: 768px) {
+  #myInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+    font-size: large;
+    margin: 0 35%;
+    /* width: fit-content; */
+  }
 }
+
 #actions {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -164,5 +168,46 @@ form h4 {
 }
 form input {
   margin-bottom: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
+  }
+  h1 {
+    font-size: 10px;
+  }
+  #actions {
+    display: flex;
+    flex-direction: row;
+    top: 10%;
+    margin-bottom: 20px;
+  }
+  #actions button {
+    width: 150px;
+  }
+  #signup {
+    margin-top: 120px;
+  }
+
+  #myInfo {
+    display: flex;
+    margin-top: 10px 0;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 30%;
+    left: 50%;
+    justify-content: center;
+    text-align: justify;
+    font-size: large;
+    /* margin: 0 35%; */
+    background-color: white;
+  }
+  #myInfo p {
+    margin: 25px 10px;
+  }
 }
 </style>

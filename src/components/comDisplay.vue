@@ -3,16 +3,17 @@
     <article class="comFeed" v-for="item in comment" :key="item.commentId">
       <div>
         <ul class="comment_user_band">
-          <li>{{ item.authorId }}</li>
+          <li>{{ item.pseudo }}</li>
           <li>{{ formatDate(item.date) }}</li>
           <li>
-            <a class="btn-style" :href="'/post/' + item.postId">
+            <!-- :href="'/post/' + item.postId" -->
+            <div class="btn-style" id="test">
               <img
                 src="../assets/ellipsis-solid.svg"
                 alt="profil"
                 id="ellipsis"
               />
-            </a>
+            </div>
           </li>
         </ul>
       </div>
@@ -44,6 +45,7 @@ export default {
         // const data = JSON.stringify(response.data);
         // console.log(typeof data);
         this.comment = response.data;
+        console.log(this.comment);
       });
   },
   methods: {
@@ -84,11 +86,6 @@ h1 {
   margin-bottom: 10px;
 }
 
-.authComment {
-  text-align: justify;
-  margin: 10px;
-  padding: 5px;
-}
 .comment_user_band {
   display: flex;
   flex-direction: row;
@@ -109,5 +106,14 @@ h1 {
   text-align: justify;
   margin: 20px 20px 10px;
   padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+.comFeed {
+  margin: 5px auto;
+  border: 1px solid #4E5166;
+  border-radius: 10px;
+  width: 100%;
+}
 }
 </style>

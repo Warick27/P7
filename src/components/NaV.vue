@@ -2,6 +2,7 @@
   <nav class="navbar navbar-expand navbar-light fixed-top d-flex">
     <div class="container">
       <router-link to="/" class="navbar-brand">Home</router-link>
+      <img src="./assets/icon-left-font.svg" alt="Logo Groupomania" />
     </div>
   </nav>
 </template>
