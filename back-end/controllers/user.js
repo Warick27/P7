@@ -33,7 +33,7 @@ exports.signup = (req, response, next) => {
             add,
             [user.email, user.password, user.pseudo],
             function (err, result) {
-              if (err) result.status(400).json({ error });
+              if (err) response.status(400).json({ message: "il y a un problème avec la base de données" });
               response.status(201).json({
                 pseudo: user.pseudo,
                 userId: result.insertId,

@@ -12,16 +12,18 @@
         <router-view />
       </div>
     </div>
+    <FooterBand />
   </div>
 </template>
 
 <script>
 import NaV from "./components/NaV.vue";
-
+import FooterBand from "./components/FooterBand.vue";
 export default {
   name: "App",
   components: {
     NaV,
+    FooterBand,
   },
 };
 </script>
