@@ -1,6 +1,5 @@
 const pool = require("../config/db");
 
-// Ok plus de message : "res.status is not a function" par rapport à la ligne 15 en changeant le nom à result
 exports.create = (req, res, next) => {
   const comment = {
     postId: req.body.postId,
@@ -18,15 +17,6 @@ exports.create = (req, res, next) => {
   );
 };
 
-// exports.getOne = (req, res, next) => {
-//     let oneComment = `SELECT * FROM comment WHERE commentId =?`;
-//     pool.execute(oneComment, [req.body.commentId], function (err, result) {
-//         if (err) res.status(400).json({ err });
-//         res.status(200).json(result)
-//     });
-// }
-
-// ok rajout erreur "Il n'y a pas de commentaire à ce post"
 exports.getAll = (req, res, next) => {
   let allComment = `SELECT postId, authorId, pseudo, date, commentaire FROM groupomania.comment INNER JOIN groupomania.user on authorId = user.id WHERE postId=? ORDER BY date DESC;`;
   pool.execute(allComment, [req.params.id], function (err, result) {
@@ -43,7 +33,7 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.getAllCount = (req, res, next) => {
-  let allCount = `SELECT postId,COUNT(*) as count FROM groupomania.comment WHERE postId=? GROUP By postId`;
+  let allCount = `SELECT postId,COUNT(*) as count FROM groupomania.comment WHERE postId=? GROUP By postId;`;
   pool.execute(allCount, [req.params.id], function (err, result) {
     const found = result;
     console.log(found);
@@ -57,8 +47,6 @@ exports.getAllCount = (req, res, next) => {
   });
 };
 
-// Ok plus d'erreurs
-// Vérification userID ?
 exports.modify = (req, response, next) => {
   let searchComment = `SELECT * FROM groupomania.comment WHERE commentId=?;`;
   pool.execute(searchComment, [req.params.id], function (err, res) {
@@ -107,4 +95,3 @@ exports.delete = (req, response, next) => {
     }
   });
 };
-// Ajouter gestion du compte de commentaire

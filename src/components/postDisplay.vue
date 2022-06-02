@@ -1,12 +1,8 @@
 <template>
   <div id="news">
     <div class="action">
-      <button class="btn btn-primary btn-block" @click="postmodify">
-        Modifier
-      </button>
-      <button class="btn btn-primary btn-block" @click="postDelete">
-        Supprimer
-      </button>
+      <button class="btn btn-block" @click="postmodify">Modifier</button>
+      <button class="btn btn-block" @click="postDelete">Supprimer</button>
     </div>
 
     <div class="feed">
@@ -44,7 +40,10 @@
                   />
                 </a>
               </div>
-              <a class="bt-style comCount" href="#">
+              <a
+                class="bt-style comCount"
+                :href="'/post/' + item.postId + '/comment'"
+              >
                 <p class="count">{{ count[0].count }}</p>
                 <img
                   src="../assets/comment-regular.svg"
@@ -149,7 +148,8 @@ export default {
       const token = localStorage.getItem("token");
       const response = await axios
         .delete(
-          `post/${idPost}`, { data: { userId: idUser } },
+          `post/${idPost}`,
+          { data: { userId: idUser } },
           {
             headers: { Authorization: "Bearer " + this.token },
           },
@@ -158,9 +158,10 @@ export default {
           }
         )
         .then((response) => {
-          alert(response[0].data + "Publication supprimée !");
+          console.log(response);
+          alert("Publication supprimée !");
         });
-        this.$router.push("/");
+      this.$router.push("/");
     },
   },
 };
@@ -195,15 +196,10 @@ a {
   width: 20px;
   background-color: transparent;
 }
-/* .btn-style {
-  background-color: #fd2d01;
-  border: none;
-  cursor: pointer;
-}
-.btn-style:hover {
-  background-color: #fd2b019b;
-} */
 
+.btn {
+  color: white;
+}
 #com {
   width: 20px;
 }
@@ -246,15 +242,6 @@ h1 {
   padding: 10px;
 }
 
-/* .post_comment_add {
-  margin: 10px auto 20px;
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  width: 70%;
-} */
-
 .heart_style {
   display: flex;
   justify-content: center;
@@ -265,7 +252,14 @@ h1 {
   margin: auto 5px;
   font-size: 22px;
 }
-
+@media screen and (max-width: 1366px) {
+  .post {
+    width: 100%;
+  }
+  .feed {
+    margin: 0 auto;
+  }
+}
 @media screen and (max-width: 768px) {
   .action {
     margin-top: 10px;

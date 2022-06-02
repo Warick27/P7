@@ -1,40 +1,42 @@
 <template>
   <form @submit.prevent="handleSignup">
-  <h3 id="connect">S'enregistrer</h3>
+    <h1 id="connect">S'enregistrer</h1>
+    <p>
+      Vous disposez déjà d'un compte ? <a href="/login">Accéder à mon compte</a>
+    </p>
+
     <div class="containerSignup">
       <div class="form-group">
-        <label for="form-control email"></label>
+        <label for="email">Email</label>
         <input
           type="email"
+          id="email"
           class="form-control email"
           v-model="email"
           placeholder="Email"
         />
       </div>
       <div class="form-group">
-        <label for="form-control password"></label>
+        <label for="password">Password</label>
         <input
           type="password"
+          id="password"
           class="form-control password"
           v-model="password"
           placeholder="password"
         />
       </div>
       <div class="form-group">
-        <label for="form-control pseudo"></label>
+        <label for="pseudo">Pseudo</label>
         <input
           type="text"
+          id="pseudo"
           class="form-control pseudo"
           v-model="pseudo"
           placeholder="Pseudo"
         />
       </div>
-      <button
-        class="btn btn-block"
-        :class="{ disabled: !validateData }"
-      >
-        Valider
-      </button>
+      <button class="btn">Valider</button>
     </div>
   </form>
 </template>
@@ -74,7 +76,6 @@ export default {
         password: this.password,
         pseudo: this.pseudo,
       });
-      // console.log(response);
       localStorage.setItem("id", response.data.userId);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("pseudo", response.data.pseudo);
@@ -83,11 +84,44 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .btn {
   color: white;
 }
-@media screen and (max-width: 768px) {
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+.form-group label {
+  margin: 20px 50px;
+}
+@media screen and (min-width: 993px) {
+  .containerSignup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+  }
+  .form-group {
+    width: 75%;
+  }
+  /* .form-group label {
+    margin: 10px auto;
+  } */
+  .validation {
+    margin: 10px auto;
+  }
+  .btn {
+    margin-top: 20px;
+    width: 30%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 992px) {
   #connect {
     margin-top: 30px;
   }
@@ -102,16 +136,12 @@ export default {
   .containerSignup button {
     margin-top: 20px;
   }
-  /* .form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 90%;
-  } */
-  .form-group label {
+
+  /* .form-group label {
     margin: 10px auto;
-  }
+  } */
   .validation {
     margin: 10px auto;
   }
-}</style>
+}
+</style>

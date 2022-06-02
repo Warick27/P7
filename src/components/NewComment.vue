@@ -15,7 +15,7 @@
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
-      <button class="btn btn-primary btn-block" type="submit">Valider</button>
+      <button class="btn btn-block" type="submit">Valider</button>
     </div>
   </form>
 </template>
@@ -113,11 +113,10 @@ h2 {
 .validation {
   margin-bottom: 10px;
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .containerCom {
     margin: 20px auto;
-    border: 1px solid #FFD7D7;
+    border: 1px solid #ffd7d7;
     border-radius: 10px;
     width: 100%;
   }

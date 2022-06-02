@@ -2,8 +2,11 @@
 
 <template>
   <div id="app">
-    <NaV />
-    <img src="./assets/icon-left-font.svg" alt="Logo Groupomania" id="logo" />
+    <NaV /><img
+      src="./assets/icon-left-font-monochrome-black.png"
+      alt="logo groupomania fond noir"
+      id="logoN"
+    />
     <div class="auth-wrapper">
       <div class="auth-inner">
         <router-view />
@@ -24,8 +27,7 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
 * {
   box-sizing: border-box;
   color: #4e5166;
@@ -63,16 +65,17 @@ html,
 .btn {
   background-color: #fd2d01;
   border: none;
+  color: #ffffff !important;
 }
-
 .btn:hover {
-  background-color: #fd2b019b;
+  background-color: #fd2b0191;
+  color: #ffffff;
 }
 
 #app {
   text-align: center;
 }
-#logo {
+#logoG {
   width: 10vw;
   height: 50vh;
   z-index: 0;
@@ -84,20 +87,15 @@ html,
 }
 
 .navbar-light {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
 }
 
 .auth-wrapper {
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left; */
   position: absolute;
   transform: translate(-50%, -50%);
   top: 60%;
   left: 50%;
-  z-index: 1;
 }
 
 .auth-inner {
@@ -124,20 +122,86 @@ html,
 .custom-control-label {
   font-weight: 400;
 }
-
-@media screen and (max-width: 768px) {
-  #logo {
-    display: none;
+@media screen and (min-width: 1367px) {
+  #logoN {
+    display: flex;
+    width: 200px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 3%;
+    left: 85%;
+    z-index: 0;
+  }
+}
+@media screen and (min-width: 993px) and (max-width: 1366px) {
+  #logoG {
+    top: 40%;
+    left: 50%;
+    width: 300px;
+  }
+  #logoN {
+    display: flex;
+    width: 200px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 3.5%;
+    left: 90%;
+    z-index: 0;
   }
   .auth-inner {
-    width: 100%;
+    width: 50%;
     margin: auto;
     background: #fff;
     box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
     /* padding: 40px 55px 45px 55px; */
     padding: 5px;
     border-radius: 15px;
+    padding: 30px;
     transition: all 0.3s;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  #logoG {
+    display: none;
+  }
+  #logoN {
+    display: flex;
+    width: 200px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 2.5%;
+    left: 85%;
+    z-index: 0;
+  }
+}
+@media screen and (max-width: 769px) {
+  .auth-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 65%;
+    left: 50%;
+  }
+  .auth-inner {
+    width: 100%;
+    height: fit-content;
+    margin: auto;
+    background: #fff;
+    box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s;
+  }
+  #logoG {
+    display: none;
+  }
+  #logoN {
+    display: flex;
+    width: 200px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 4%;
+    left: 70%;
+    z-index: 0;
   }
 }
 /* Reset CSS*/

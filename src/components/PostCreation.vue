@@ -33,7 +33,7 @@
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
-      <button class="btn btn-primary btn-block" type="submit">Valider</button>
+      <button class="btn btn-block" type="submit">Valider</button>
     </div>
   </form>
 </template>
@@ -52,9 +52,8 @@ export default {
   methods: {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
-      console.log(this.selectedFile.name);
     },
-    handleSubmit() {
+    async handleSubmit() {
       const id = localStorage.getItem("id");
       let token = localStorage.getItem("token");
       const fd = new FormData();
@@ -63,7 +62,7 @@ export default {
       fd.append("text", this.message);
       fd.append("userId", id);
 
-      const response = axios.post(
+      const response = await axios.post(
         "/post",
         fd,
         { headers: { Authorization: "Bearer " + token } },
@@ -72,6 +71,7 @@ export default {
         }
       );
       console.log(response);
+      alert("Publication crée !");
       this.$router.push("/");
     },
   },
@@ -84,19 +84,34 @@ export default {
   top: 45%;
   left: 50%;
   border: 1px solid #ffd7d7;
-  /* min-width: 350px; */
   width: 70vw;
   background: white;
   border-radius: 10px;
   padding: 20px;
 }
-/* #message {
-  height: 200px;
-} */
-@media screen and (min-width: 1366px) {
+
+@media screen and (min-width: 1367px) {
   .containerPost {
     top: 50%;
     min-width: 450px;
+  }
+}
+@media screen and (min-width: 993px) and (max-width: 1366px) {
+  .containerPost {
+    top: 55%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .containerPost {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 37%;
+    left: 50%;
+    border: 1px solid #ffd7d7;
+    width: 70vw;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
   }
 }
 h2 {
@@ -145,6 +160,7 @@ h2 {
 @media screen and (max-width: 768px) {
   .containerPost {
     width: 100%;
+    top: 51%;
   }
   .field_label_textaera {
     margin: 10px auto;

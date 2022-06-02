@@ -1,14 +1,9 @@
 <template>
   <nav class="nav navbar-light">
     <div class="container">
-      <router-link to="/" class="navbar-brand">Home</router-link>
-      <!-- <div>
-        <img
-          src="./assets/icon-left-font.svg"
-          alt="Logo Groupomania"
-          id="navLogo"
-        />
-      </div> -->
+      <router-link to="/" class="home"
+        ><img src="../assets/house-solid.svg" alt="house" id="house"
+      /></router-link>
     </div>
   </nav>
 </template>
@@ -17,23 +12,11 @@
 export default {
   name: "NaV",
   data() {
-    return {
-      // mode: "CACHE",
-    };
+    return {};
   },
-  // methods: {
-  //   displayNav() {
-  //     if (localStorage.getItem("id") != null) {
-  //       this.mode = "AFFICHE";
-  //     }
-  //   },
-  // },
-  // created() {
-  //   this.displayNav();
-  // },
 };
 </script>
-<style scoped>
+<style>
 .nav {
   height: 50px;
   background: transparent;
@@ -41,12 +24,28 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.container {
-  display: flex;
-  justify-content: center;
+#house {
+  width: 40px;
+  height: 40px;
+  color: #4e5166;
+  cursor: pointer;
 }
+
 #navLogo {
   width: 30% !important;
   height: auto;
+}
+.home {
+  color: #4e5166;
+  text-decoration: none;
+  font-size: x-large;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+}
+#logoN {
+  display: flex;
 }
 </style>

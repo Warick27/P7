@@ -74,6 +74,7 @@ export default {
     return {
       posts: [],
       token: localStorage.getItem("token"),
+      comment: [],
     };
   },
   created() {
@@ -115,14 +116,16 @@ export default {
             });
         });
     },
-    //   revealMenu() {
-    //     const visible = document.querySelector(".manage").style.display;
-    //     if (visible.style === "none") {
-    //       visible.style = "block";
-    //     } else {
-    //       visible.style = "none";
-    //     }
-    //   },
+    // nbrComment(idPost) {
+    //   axios
+    //     .get("comment/" + idPost, {
+    //       headers: { Authorization: "Bearer " + this.token },
+    //     })
+    //     .then((response) => {
+    //       this.comment = response.data;
+    //       console.log(this.comment);
+    //     });
+    // },
   },
 };
 </script>
@@ -139,10 +142,10 @@ export default {
 a {
   text-decoration: none;
 }
-.hello {
+/* .hello {
   text-align: center;
   font-weight: bold;
-}
+} */
 .feed {
   margin: 10px auto;
 }
@@ -160,14 +163,6 @@ a {
   width: 20px;
   background-color: transparent;
 }
-/* .btn-style {
-  background-color: white;
-  border: none;
-  cursor: pointer;
-}
-.btn-style:hover {
-  color: red;
-} */
 
 #com {
   width: 20px;
@@ -223,7 +218,14 @@ h1 {
 .coeur {
   cursor: pointer;
 }
-
+@media screen and (max-width: 1366px) {
+  .post {
+    width: 100%;
+  }
+  .feed {
+    margin: 0 auto;
+  }
+}
 @media screen and (max-width: 768px) {
   .post {
     width: 100%;

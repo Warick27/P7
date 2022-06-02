@@ -95,7 +95,14 @@ h1 {
   margin: 20px 20px 10px;
   padding: 10px;
 }
-
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .post {
+  }
+  .comFeed {
+    width: 100%;
+    margin: 20px auto;
+  }
+}
 @media screen and (max-width: 768px) {
   .comFeed {
     margin: 5px auto;

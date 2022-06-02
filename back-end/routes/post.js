@@ -14,21 +14,12 @@ const postCtrl = require('../controllers/post');
 // Ajouter un post
 router.post('/', auth, multer, postCtrl.create);
 // // Modifier un post
-// router.put('/:id', auth, multer, postCtrl.modify)
 router.put('/:id', auth, multer, postCtrl.modify)
 // // Supprimer un post
-// router.delete('/:id', auth, postCtrl.delete);
 router.delete('/:id', auth, postCtrl.delete);
 // Récupérer un post
 router.get('/:id', auth, postCtrl.getOne);
 // Récupérer tous les post
-// router.get('/', auth, postCtrl.getAll);
 router.get('/', auth, postCtrl.getAll);
-
-// // Modérateur
-// // Modifier un post
-// router.put('/:id', auth, multer, postCtrl.modify);
-// // Supprimer un post
-// router.delete('/:id', auth, postCtrl.delete);
 
 module.exports = router;

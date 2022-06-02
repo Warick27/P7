@@ -14,13 +14,9 @@ const validation = require('../middleware/validation');
 
 router.post("/signup", validation, userCtrl.signup);
 router.post("/login", userCtrl.login);
-router.put("/:id", userCtrl.modify);
+router.put("/:id", auth, userCtrl.modify);
 router.delete("/:id", auth, userCtrl.delete);
 router.get("/", auth, userCtrl.getAll);
 router.get("/:id", auth, userCtrl.getOne);
-// router.post("/signup", validation, userCtrl.signup);
-// router.put("/modify/:id", auth, multer, userCtrl.modifyProfile);
-// router.delete("/delete/:id", auth, userCtrl.delete);
-
 
 module.exports = router;

@@ -34,7 +34,7 @@
       <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
     </div>
     <div class="validation">
-      <button class="btn btn-primary btn-block" type="submit">Valider</button>
+      <button class="btn btn-block" type="submit">Valider</button>
     </div>
   </form>
 </template>
@@ -111,22 +111,24 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .containerPost {
   position: absolute;
   transform: translate(-50%, -50%);
   top: 45%;
   left: 50%;
-  /* border: 1px solid #FD2D01; */
-  /* min-width: 350px; */
   width: 70vw;
-  /* background: white; */
   border-radius: 10px;
   padding: 20px;
 }
-/* #message {
-  height: 200px;
-} */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .containerPost {
+    top: 23%
+  }
+  .auth-inner {
+    height: 45%;
+  }
+}
 @media screen and (min-width: 1366px) {
   .containerPost {
     top: 50%;
@@ -181,6 +183,5 @@ h2 {
   .field_input {
     margin: 0;
   }
-
 }
 </style>

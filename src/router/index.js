@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HoMe from "../components/HoMe.vue";
+import HoMe from "../views/HoMe.vue";
 import LoGin from "../components/LoGin.vue";
 import SignupPage from "../components/SignupPage.vue";
 

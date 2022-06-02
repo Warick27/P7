@@ -37,7 +37,7 @@
         <!-- <span v-if="errors.pseudo">{{ errors.pseudo }}</span> -->
       </div>
       <div class="validation">
-        <button class="btn btn-primary btn-block" type="submit">Valider</button>
+        <button class="btn btn-block" type="submit">Valider</button>
       </div>
     </div>
   </div>

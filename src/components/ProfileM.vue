@@ -30,7 +30,7 @@
       </div>
       <div class="validation">
         <!-- :disabled="errors.password || errors.pseudo" -->
-        <button class="btn btn-primary btn-block" type="submit">Valider</button>
+        <button class="btn btn-block" type="submit">Valider</button>
       </div>
     </form>
   </div>
@@ -80,18 +80,23 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 768px) {
+
   .form-group {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 90%;
+    width: 100%;
   }
   .form-group label {
     margin: 10px auto;
   }
   .validation {
     margin: 10px auto;
+  }
+
+@media screen and (max-width: 1366px) {
+  .containerProfile {
+    margin-top: 1000px;
   }
 }
 </style>

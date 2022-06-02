@@ -20,8 +20,6 @@ exports.getOne = (req, res, next) => {
   });
 };
 
-// problème avec Multer => MulterError: Unexpected field
-// maintenant crée le fichier mais la requête n'aboutit pas
 exports.create = (req, res, next) => {
   const image = `${req.protocol}://${req.get("host")}/images/${
     req.file.filename
@@ -42,8 +40,7 @@ exports.create = (req, res, next) => {
     }
   );
 };
-// if (req.file)
-// ok mais à implémenter pour d'autres modifications
+
 exports.modify = (req, res, next) => {
   let searchPost = `SELECT * FROM groupomania.post WHERE postId=?;`;
   pool.execute(searchPost, [req.params.id], function (err, result) {
@@ -83,7 +80,6 @@ exports.modify = (req, res, next) => {
   });
 };
 
-// à tester
 exports.delete = (req, res, next) => {
   let search = `SELECT * FROM groupomania.post WHERE postId=?`;
   pool.execute(search, [req.params.id], function (err, resultat) {
@@ -117,5 +113,3 @@ exports.delete = (req, res, next) => {
     }
   });
 };
-
-// Ajouter gestion du compte de like
