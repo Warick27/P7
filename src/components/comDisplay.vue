@@ -87,7 +87,7 @@ h1 {
   margin: 50px auto;
   border: 1px solid black;
   border-radius: 10px;
-  width: 50%;
+  width: 100%;
 }
 .message {
   height: fit content;
@@ -96,10 +96,8 @@ h1 {
   padding: 10px;
 }
 @media screen and (min-width: 769px) and (max-width: 992px) {
-  .post {
-  }
+
   .comFeed {
-    width: 100%;
     margin: 20px auto;
   }
 }
@@ -108,7 +106,6 @@ h1 {
     margin: 5px auto;
     border: 1px solid #4e5166;
     border-radius: 10px;
-    width: 100%;
   }
 }
 </style>
